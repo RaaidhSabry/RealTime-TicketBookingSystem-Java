@@ -1,0 +1,9 @@
+{
+  "totalTickets": 500,
+  "ticketReleaseRate": 1,
+  "customerRetrievalRate": 1,
+  "maxTicketCapacity": 5000,
+  "isRunning": false,
+  "currentTicketsAvailable": 1031,
+  "ticketsSold": 69
+}
