@@ -1,0 +1,19 @@
+<h2>Sign Up</h2>
+<form (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Full Name</mat-label>
+    <input matInput type="text" required [(ngModel)]="fullName" name="fullName">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" required [(ngModel)]="email" name="email">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" required [(ngModel)]="password" name="password">
+  </mat-form-field>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button color="primary" type="submit">Sign Up</button>
+    </mat-dialog-actions>
+</form>

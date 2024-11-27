@@ -1,0 +1,45 @@
+<div class="app-container">
+  <header>
+    <h1 style="padding-right: 900px; padding-left: 25px">Ticket Booking System</h1>
+    <nav>
+      <ul>
+        <li><a (click)="openLoginDialog()">Log-in</a></li>
+        <li><a (click)="openSignupDialog()">Sign-up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <li><a routerLink="/ticket-pool" routerLinkActive="active">ticket-pool</a></li>
+    <li><a routerLink="/vendor" routerLinkActive="active">vendor</a></li>
+    <router-outlet></router-outlet>
+
+    <div class="row">
+      <!-- Ticket Status -->
+      <section class="col">
+        <app-ticket-status></app-ticket-status>
+      </section>
+
+      <!-- Control Panel -->
+      <section class="col">
+        <app-control-panel></app-control-panel>
+      </section>
+    </div>
+
+    <div class="row">
+      <!-- Configuration Form -->
+      <section class="col">
+        <app-configuration></app-configuration>
+      </section>
+
+      <!-- Log Display -->
+      <section class="col">
+        <app-log-display></app-log-display>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Ticket Booking System. All rights reserved.</p>
+  </footer>
+</div>

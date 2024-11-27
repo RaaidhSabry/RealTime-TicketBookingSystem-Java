@@ -1,0 +1,29 @@
+<div class="ticket-pool">
+  <h2>Ticket Pool</h2>
+  <p>Current Tickets Available: <strong>{{ currentTickets }}</strong></p>
+  <p>Total Tickets Sold: <strong>{{ totalTicketsSold }}</strong></p>
+
+  <div class="controls">
+    <label for="add-tickets">Add Tickets:</label>
+    <input
+      id="add-tickets"
+      type="number"
+      [(ngModel)]="ticketsToAdd"
+      placeholder="Enter quantity"
+    />
+    <button (click)="addTickets()">Add</button>
+  </div>
+
+  <div class="controls">
+    <label for="remove-tickets">Remove Tickets:</label>
+    <input
+      id="remove-tickets"
+      type="number"
+      [(ngModel)]="ticketsToRemove"
+      placeholder="Enter quantity"
+    />
+    <button (click)="removeTickets()">Remove</button>
+  </div>
+
+  <p class="message">{{ message }}</p>
+</div>

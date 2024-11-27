@@ -1,0 +1,11 @@
+<div class="configuration-form">
+  <h2>Configuration</h2>
+  <form (submit)="submitConfig()">
+    <label>
+      Max Capacity:
+      <input type="number" [(ngModel)]="maxCapacity" />
+    </label>
+    <button type="submit">Update</button>
+  </form>
+  <p>{{ message }}</p>
+</div>
