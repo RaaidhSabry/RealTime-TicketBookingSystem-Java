@@ -5,10 +5,10 @@ import axios from 'axios';
   providedIn: 'root',
 })
 export class TicketService {
-  private apiUrl = 'http://localhost:8080/api/ticketpool'; // Backend URL
-
+  private apiUrl = ''; // Backend URL
   getCurrentTickets(): Promise<number> {
     return axios.get(`${this.apiUrl}/currentTickets`).then((res) => res.data);
+
   }
 
   addTickets(quantity: number): Promise<string> {

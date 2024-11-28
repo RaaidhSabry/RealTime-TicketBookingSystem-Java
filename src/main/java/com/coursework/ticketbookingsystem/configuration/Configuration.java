@@ -1,5 +1,7 @@
 package com.coursework.ticketbookingsystem.configuration;
 
+import com.coursework.ticketbookingsystem.customer.Customer;
+import com.coursework.ticketbookingsystem.vendor.Vendor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -10,12 +12,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Configuration {
+    public static int maxTicketCapacity;
+    public static int totalTicketsSold;
+    public static int ticketReleaseRate;
+    public static int customerRetrievalRate;
     private int totalTickets;
-    private int ticketReleaseRate; // Rate in minutes
-    private int customerRetrievalRate; // Rate in seconds
-    private int maxTicketCapacity;
     private boolean isRunning = false; // Flag to control the ticket operations
-    private int currentTicketsAvailable; // Track current available tickets
+    public static int currentTicketsAvailable; // Track current available tickets
     private int ticketsSold = 0; // Track total tickets sold
 
     public Configuration() {}
@@ -77,6 +80,15 @@ public class Configuration {
     public int getTicketsSold(){
         return ticketsSold;
     }
+
+    public static int getTicketReleaseInterval() {
+        return ticketReleaseRate * 60 * 1000; // Convert minutes to milliseconds
+    }
+
+    public static int getCustomerRetrievalInterval() {
+        return customerRetrievalRate * 10 * 1000; // Convert seconds to milliseconds
+    }
+
 
     public void start() {
         System.out.println("Running the Command Line Interface (CLI)...");
@@ -159,7 +171,7 @@ public class Configuration {
                         synchronized (this) {
                             int remainingCapacity = maxTicketCapacity - (ticketsSold + currentTicketsAvailable);
                             if (remainingCapacity > 0) {
-                                int ticketsToAdd = Math.min(300, remainingCapacity);
+                                int ticketsToAdd = Math.min(Vendor.ticketsPerRelease, remainingCapacity);
                                 currentTicketsAvailable += ticketsToAdd;
                                 System.out.println(ticketsToAdd + " tickets released. Current available tickets: " + currentTicketsAvailable);
                                 logTransaction("Released " + ticketsToAdd + " tickets.");
@@ -168,7 +180,8 @@ public class Configuration {
                                 break;
                             }
                         }
-                        Thread.sleep(ticketReleaseRate * 60 * 1000); // Convert minutes to milliseconds
+                        // Convert ticket release rate from minutes to milliseconds
+                        Thread.sleep(getTicketReleaseInterval()); // Multiply by 60 seconds and 1000 milliseconds
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
@@ -182,7 +195,7 @@ public class Configuration {
                     while (isRunning) {
                         synchronized (this) {
                             if (currentTicketsAvailable > 0) {
-                                int ticketsToBuy = Math.min(1, currentTicketsAvailable); // Customer buys 1 ticket at a time
+                                int ticketsToBuy = Math.min(Customer.ticketsToPurchase, currentTicketsAvailable); // Customer buys 1 ticket at a time
                                 currentTicketsAvailable -= ticketsToBuy;
                                 ticketsSold += ticketsToBuy; // Increase the tickets sold count
                                 System.out.println("Customer purchased " + ticketsToBuy + " ticket(s). Tickets remaining: " + currentTicketsAvailable);
@@ -192,7 +205,8 @@ public class Configuration {
                                 break;
                             }
                         }
-                        Thread.sleep(customerRetrievalRate * 1000); // Convert seconds to milliseconds
+                        // Convert customer retrieval rate from seconds to milliseconds
+                        Thread.sleep(getCustomerRetrievalInterval()); // Multiply by 1000 to convert seconds to milliseconds
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();

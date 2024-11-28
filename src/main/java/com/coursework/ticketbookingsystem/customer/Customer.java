@@ -1,13 +1,15 @@
 package com.coursework.ticketbookingsystem.customer;
 
+import com.coursework.ticketbookingsystem.configuration.Configuration;
 import com.coursework.ticketbookingsystem.configuration.Logger;
 import com.coursework.ticketbookingsystem.ticketpool.TicketPool;
 
 public class Customer implements Runnable {
     private final int customerId;
-    private final int retrievalInterval; // Time in milliseconds between purchase attempts
+    public static int ticketsToPurchase=1;
+    public static int retrievalInterval=1000;
     private final TicketPool ticketPool;
-    private final int ticketsToPurchase;
+
 
     public Customer(int customerId, int ticketsToPurchase, int retrievalInterval, TicketPool ticketPool) {
         this.customerId = customerId;
@@ -16,17 +18,24 @@ public class Customer implements Runnable {
         this.ticketPool = ticketPool;
     }
 
+    public Customer(int customerId, TicketPool ticketPool){
+        this.customerId = customerId;
+        this.ticketPool = ticketPool;
+    }
+
     @Override
     public void run() {
         try {
-            while (true) {
+            while (!ticketPool.isSoldOut()) {
                 boolean purchased = ticketPool.removeTickets(ticketsToPurchase);
-                Logger.logToConsole("Customer " + customerId + " attempted to purchase " + ticketsToPurchase + " tickets.");
-                if (!purchased) {
-                    Logger.logToConsole("Customer " + customerId + " could not purchase tickets due to insufficient availability.");
+                if (purchased) {
+                    Logger.logToConsole("Customer " + customerId + " purchased " + ticketsToPurchase + " tickets.");
+                } else {
+                    Logger.logToConsole("Customer " + customerId + " could not purchase tickets. Tickets available: " + ticketPool.getCurrentTicketsAvailable());
                 }
-                Thread.sleep(retrievalInterval);
+                Thread.sleep(retrievalInterval); // Slow down by increasing multiplier (e.g., 3000 ms).
             }
+            Logger.logToConsole("Customer " + customerId + " stops trying. Tickets are sold out.");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             Logger.logToConsole("Customer " + customerId + " was interrupted.");

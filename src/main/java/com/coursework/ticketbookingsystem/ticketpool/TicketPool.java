@@ -1,7 +1,8 @@
 package com.coursework.ticketbookingsystem.ticketpool;
 
 import com.coursework.ticketbookingsystem.configuration.Logger;
-import org.springframework.beans.factory.annotation.Value;
+import com.coursework.ticketbookingsystem.configuration.Configuration;
+import com.coursework.ticketbookingsystem.vendor.Vendor;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -15,23 +16,32 @@ public class TicketPool {
     private int totalTicketsSold;
 
     // Constructor
-    public TicketPool(@Value("${ticketpool.maxTicketCapacity}") int maxTicketCapacity) {
-        this.maxTicketCapacity = maxTicketCapacity;
+    public TicketPool() {
+        this.maxTicketCapacity = Configuration.maxTicketCapacity;
         this.tickets = Collections.synchronizedList(new LinkedList<>());
-        this.totalTicketsSold = 0;
+
+        // Initialize with available tickets, ensuring it does not exceed max capacity
+        int initialTickets = Math.min(Configuration.currentTicketsAvailable, maxTicketCapacity);
+        for (int i = 0; i < initialTickets; i++) {
+            tickets.add(1);
+        }
+        totalTicketsSold = 0;
+
+        Logger.logToConsole("TicketPool initialized with " + tickets.size() + " tickets.");
     }
 
-    // Adds tickets to the pool, but only if max capacity is not exceeded
+    // Adds tickets to the pool, respecting max capacity
     public synchronized void addTickets(int numberOfTickets) {
-        int ticketsRemainingForSale = maxTicketCapacity - totalTicketsSold;
+        int ticketsRemainingForSale = getRemainingTicketsForSale();
+        int ticketsToAdd = Math.min(numberOfTickets, ticketsRemainingForSale);
 
-        if (tickets.size() + numberOfTickets <= ticketsRemainingForSale) {
-            for (int i = 0; i < numberOfTickets; i++) {
+        if (ticketsToAdd > 0) {
+            for (int i = 0; i < ticketsToAdd; i++) {
                 tickets.add(1); // Add a ticket
             }
-            Logger.logToConsole("Added " + numberOfTickets + " tickets. Current available tickets: " + tickets.size());
+            Logger.logToConsole("Added " + ticketsToAdd + " tickets. Current available tickets: " + tickets.size());
         } else {
-            Logger.logToConsole("Cannot add tickets, maximum capacity reached or would be exceeded.");
+            Logger.logToConsole("Cannot add tickets. Maximum capacity of " + maxTicketCapacity + " has been reached.");
         }
     }
 
@@ -47,7 +57,7 @@ public class TicketPool {
             Logger.logToConsole("Removed " + numberOfTickets + " tickets. Total tickets sold: " + totalTicketsSold + ". Current available tickets: " + tickets.size());
             return true;
         } else {
-            Logger.logToConsole("Not enough tickets available to remove " + numberOfTickets);
+            Logger.logToConsole("Not enough tickets available to remove " + numberOfTickets + " tickets.");
             return false;
         }
     }
@@ -69,11 +79,11 @@ public class TicketPool {
 
     // Calculates the remaining tickets that can still be sold
     public int getRemainingTicketsForSale() {
-        return maxTicketCapacity - totalTicketsSold;
+        return maxTicketCapacity - (totalTicketsSold + tickets.size());
     }
 
     // Check if the tickets are sold out
     public boolean isSoldOut() {
-        return totalTicketsSold >= maxTicketCapacity;
+        return tickets.size() == 0 && totalTicketsSold >= maxTicketCapacity;
     }
 }

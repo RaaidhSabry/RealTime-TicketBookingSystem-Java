@@ -1,12 +1,14 @@
 package com.coursework.ticketbookingsystem.ticketpool;
 
+import com.coursework.ticketbookingsystem.configuration.Configuration;
+import com.coursework.ticketbookingsystem.vendor.Vendor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TicketPoolService {
 
-    private final TicketPool ticketPool;
+    private TicketPool ticketPool;
 
     @Autowired
     public TicketPoolService(TicketPool ticketPool) {
@@ -15,9 +17,14 @@ public class TicketPoolService {
 
     // Service method to add tickets, considering max capacity
     public String addTickets(int numberOfTickets) {
-        if (ticketPool.getRemainingTicketsForSale() > 0 && ticketPool.getCurrentTicketsAvailable() + numberOfTickets <= ticketPool.getRemainingTicketsForSale()) {
-            ticketPool.addTickets(numberOfTickets);
-            return "Tickets added successfully. Current available tickets: " + ticketPool.getCurrentTicketsAvailable();
+        int remainingCapacity = ticketPool.getRemainingTicketsForSale();
+
+        if (remainingCapacity > 0) {
+            // Add only the tickets that can fit without exceeding capacity
+            int ticketsToAdd = Math.min(numberOfTickets, remainingCapacity);
+            ticketPool.addTickets(ticketsToAdd);
+
+            return "Added " + ticketsToAdd + " tickets successfully. Current available tickets: " + ticketPool.getCurrentTicketsAvailable();
         } else {
             return "Cannot add tickets, maximum ticket capacity of " + ticketPool.getMaxTicketCapacity() + " has been reached or would be exceeded.";
         }

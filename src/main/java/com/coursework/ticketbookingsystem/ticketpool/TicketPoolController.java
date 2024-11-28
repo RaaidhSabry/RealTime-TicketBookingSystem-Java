@@ -37,4 +37,9 @@ public class TicketPoolController {
     public int getMaxTicketCapacity() {
         return ticketPoolService.getMaxTicketCapacity();
     }
+
+    @GetMapping("/currentTickets")
+    public int getCurrentTickets() {
+        return 100; // Example response
+    }
 }

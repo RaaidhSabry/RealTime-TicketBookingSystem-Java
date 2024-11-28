@@ -11,6 +11,7 @@ public class Logger {
 
     public static void logToConsole(String message) {
         System.out.println(message);
+
     }
 
     public static void logToFile(String message) {

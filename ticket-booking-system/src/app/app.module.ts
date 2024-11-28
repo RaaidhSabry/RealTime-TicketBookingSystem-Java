@@ -10,10 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { ControlPanelComponent } from './components/control-panel/control-panel.component';
-import { ConfigurationComponent } from './components/configuration/configuration.component';
-import { TicketStatusComponent } from './components/ticket-status/ticket-status.component';
-import { LogDisplayComponent } from './components/log-display/log-display.component';
+
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {SignupComponent} from './components/signup/signup.component';
@@ -24,10 +21,6 @@ import {LoginComponent} from './components/login/login.component';
     AppComponent,
     TicketPoolComponent,  // Declare all your components here
     VendorComponent,
-    TicketStatusComponent,
-    ControlPanelComponent,
-    ConfigurationComponent,
-    LogDisplayComponent
   ],
   imports: [
     BrowserModule,
@@ -50,11 +43,6 @@ import {LoginComponent} from './components/login/login.component';
   ],
   providers: [],
   bootstrap: [],
-  exports: [
-    ControlPanelComponent,
-    ConfigurationComponent,
-    LogDisplayComponent,
-    TicketStatusComponent
-  ]
+  exports: []
 })
 export class AppModule {}
