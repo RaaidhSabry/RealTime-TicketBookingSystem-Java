@@ -1,19 +1,64 @@
 <div class="app-container">
   <header>
-    <h1 style="padding-right: 900px; padding-left: 25px">Ticket Booking System</h1>
-    <nav>
-      <ul>
-        <li><a (click)="openLoginDialog()">Log-in</a></li>
-        <li><a (click)="openSignupDialog()">Sign-up</a></li>
-      </ul>
-    </nav>
+    <div class="header-content">
+      <a (click)="onLogout()" style="cursor: pointer; font-size: 24px; text-decoration: none;">
+        Ticket Booking System
+      </a>
+      <nav>
+        <ul>
+          <div *ngIf="role === 'customer'">
+            <!-- Display ticket purchasing functionality for customers -->
+            <app-customer [customerName]="customerName" [isHeader]="true"></app-customer>
+          </div>
+
+          <div *ngIf="!role" class="Head-btns">
+          <li><a (click)="openLoginDialog()">Log In</a></li>
+          <li><a (click)="openSignupDialog()">Sign Up</a></li>
+          </div>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <li><a routerLink="/ticket-pool" routerLinkActive="active">ticket-pool</a></li>
-    <li><a routerLink="/vendor" routerLinkActive="active">vendor</a></li>
-    <router-outlet></router-outlet>
+    <div class="welcome-screen">
+      <div class="space"></div>
 
+      <div class="welcome-message">
+        <h1>Welcome to the Ticket Booking System</h1>
+        <p>Here you can book tickets for various events. Stay tuned for more updates!</p>
+      </div>
+
+
+      <app-ticket-status></app-ticket-status>
+
+
+      <section *ngIf="!role">
+        <app-control-panel></app-control-panel>
+      </section>
+
+
+
+
+      <div *ngIf="role === 'customer'">
+          <br>
+          <app-customer [isHeader]="false"></app-customer>
+      </div>
+
+        <div *ngIf="role === 'vendor'">
+          <!-- Display configuration settings for vendors -->
+          <br>
+          <app-configuration-form></app-configuration-form>  <!-- Your vendor component here -->
+        </div>
+      </div>
+
+
+<!--      <div class="ticket-controller-buttons">-->
+<!--        <h1>Ticket System Control</h1>-->
+<!--        <h2>Status: {{ systemStatus }}</h2>-->
+<!--      <button id = "start" (click)="startSystem()">Start System</button>-->
+<!--      <button id = "stop" (click)="stopSystem()">Stop System</button>-->
+<!--      </div>-->
   </main>
 
   <footer>

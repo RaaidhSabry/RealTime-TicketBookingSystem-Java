@@ -1,0 +1,59 @@
+/* Vendor Page Styles */
+.vendor-page {
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #0056b3;
+}
+
+.ticket-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.ticket-actions div {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 45%;
+}
+
+.ticket-actions input {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.ticket-actions button {
+  padding: 10px 20px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.ticket-actions button:hover {
+  background-color: #00408d;
+}
+
+.status-message {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #28a745;
+}

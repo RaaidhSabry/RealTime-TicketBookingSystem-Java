@@ -11,9 +11,9 @@ import java.util.List;
 
 @Component
 public class TicketPool {
-    private final List<Integer> tickets;
-    private final int maxTicketCapacity;
-    private int totalTicketsSold;
+    private static List<Integer> tickets;
+    private static int maxTicketCapacity;
+    private static int totalTicketsSold;
 
     // Constructor
     public TicketPool() {
@@ -27,7 +27,16 @@ public class TicketPool {
         }
         totalTicketsSold = 0;
 
-        Logger.logToConsole("TicketPool initialized with " + tickets.size() + " tickets.");
+        Logger.logToConsole(toString());
+    }
+
+    @Override
+    public String toString() {
+        return "TicketPool {" +
+                "Current Tickets Available=" + tickets.size() +
+                ", Max Ticket Capacity=" + maxTicketCapacity +
+                ", Total Tickets Sold=" + totalTicketsSold +
+                '}';
     }
 
     // Adds tickets to the pool, respecting max capacity
@@ -73,12 +82,17 @@ public class TicketPool {
     }
 
     // Method to get the total tickets sold
-    public int getTotalTicketsSold() {
+    public static int getTotalTicketsSold() {
         return totalTicketsSold;
     }
 
+    public static int getCurrentTicketsForSale() {
+        return tickets.size();
+    }
+
+
     // Calculates the remaining tickets that can still be sold
-    public int getRemainingTicketsForSale() {
+    public static int getRemainingTicketsForSale() {
         return maxTicketCapacity - (totalTicketsSold + tickets.size());
     }
 

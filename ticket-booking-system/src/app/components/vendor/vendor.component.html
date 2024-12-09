@@ -1,4 +1,24 @@
-<div class="vendor">
-  <h2>Vendor Management</h2>
-  <p>Feature under development. Vendor-specific actions will go here.</p>
+<div class="vendor-page">
+  <div class="header">
+    <h2>Vendor Configuration Page</h2>
+    <p>Manage ticket pool and settings here.</p>
+  </div>
+
+  <div class="ticket-actions">
+    <div class="add-tickets">
+      <h3>Add Tickets to the Pool</h3>
+      <input type="number" [(ngModel)]="ticketsToAdd" placeholder="Number of tickets" />
+      <button (click)="addTickets()">Add Tickets</button>
+    </div>
+
+    <div class="update-config">
+      <h3>Update Ticket Release Rate</h3>
+      <input type="number" [(ngModel)]="releaseRate" placeholder="Enter new rate" />
+      <button (click)="updateReleaseRate()">Update Rate</button>
+    </div>
+  </div>
+
+  <div class="status-message">
+    <p>{{ statusMessage }}</p>
+  </div>
 </div>

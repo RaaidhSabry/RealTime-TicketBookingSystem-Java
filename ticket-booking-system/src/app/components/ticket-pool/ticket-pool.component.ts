@@ -1,80 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../../services/ticket.service';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-ticket-pool',
   templateUrl: './ticket-pool.component.html',
-  styleUrls: ['./ticket-pool.component.css'],
-  imports: [FormsModule],
   standalone: true,
+  imports: [
+    FormsModule
+  ],
+  styleUrls: ['./ticket-pool.component.css']
 })
 export class TicketPoolComponent implements OnInit {
+
   currentTickets: number = 0;
-  totalTicketsSold: number = 0;
+  maxCapacity: number = 5000;
   ticketsToAdd: number = 0;
   ticketsToRemove: number = 0;
-  message: string = '';
+  statusMessage: string = '';
 
-  constructor(private ticketService: TicketService) {}
+  constructor(private ticketService: TicketService) { }
 
   ngOnInit(): void {
-    this.fetchTicketData();
   }
 
-  fetchTicketData(): void {
-    this.ticketService
-      .getCurrentTickets()
-      .then((data) => {
-        this.currentTickets = data;
-      })
-      .catch(() => {
-        this.message = 'Error fetching current tickets.';
-      });
 
-    this.ticketService
-      .getTotalTicketsSold()
-      .then((data) => {
-        this.totalTicketsSold = data;
-      })
-      .catch(() => {
-        this.message = 'Error fetching total tickets sold.';
-      });
-  }
-
+  // Add tickets to the pool
   addTickets(): void {
-    if (this.ticketsToAdd <= 0) {
-      this.message = 'Please enter a valid number of tickets to add.';
-      return;
-    }
-
-    this.ticketService
-      .addTickets(this.ticketsToAdd)
-      .then((response) => {
-        this.message = response;
-        this.fetchTicketData();
-        this.ticketsToAdd = 0;
-      })
-      .catch(() => {
-        this.message = 'Error adding tickets.';
+    if (this.ticketsToAdd > 0) {
+      this.ticketService.addTickets(this.ticketsToAdd).subscribe(response => {
+        this.statusMessage = response;
       });
+    } else {
+      this.statusMessage = 'Please enter a valid number of tickets to add.';
+    }
   }
 
+  // Remove tickets from the pool
   removeTickets(): void {
-    if (this.ticketsToRemove <= 0) {
-      this.message = 'Please enter a valid number of tickets to remove.';
-      return;
-    }
-
-    this.ticketService
-      .removeTickets(this.ticketsToRemove)
-      .then((response) => {
-        this.message = response;
-        this.fetchTicketData();
-        this.ticketsToRemove = 0;
-      })
-      .catch(() => {
-        this.message = 'Error removing tickets.';
+    if (this.ticketsToRemove > 0) {
+      this.ticketService.removeTickets(this.ticketsToRemove).subscribe(response => {
+        this.statusMessage = response;
       });
+    } else {
+      this.statusMessage = 'Please enter a valid number of tickets to remove.';
+    }
   }
 }

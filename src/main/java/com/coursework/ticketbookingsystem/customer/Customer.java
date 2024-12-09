@@ -1,24 +1,22 @@
 package com.coursework.ticketbookingsystem.customer;
 
-import com.coursework.ticketbookingsystem.configuration.Configuration;
 import com.coursework.ticketbookingsystem.configuration.Logger;
 import com.coursework.ticketbookingsystem.ticketpool.TicketPool;
 
 public class Customer implements Runnable {
     private final int customerId;
-    public static int ticketsToPurchase=1;
-    public static int retrievalInterval=1000;
+    public static int ticketsToPurchase = 1;
+    public static int retrievalInterval = 1000;
     private final TicketPool ticketPool;
-
 
     public Customer(int customerId, int ticketsToPurchase, int retrievalInterval, TicketPool ticketPool) {
         this.customerId = customerId;
-        this.ticketsToPurchase = ticketsToPurchase;
-        this.retrievalInterval = retrievalInterval;
+        Customer.ticketsToPurchase = ticketsToPurchase;
+        Customer.retrievalInterval = retrievalInterval;
         this.ticketPool = ticketPool;
     }
 
-    public Customer(int customerId, TicketPool ticketPool){
+    public Customer(int customerId, TicketPool ticketPool) {
         this.customerId = customerId;
         this.ticketPool = ticketPool;
     }
@@ -28,17 +26,21 @@ public class Customer implements Runnable {
         try {
             while (!ticketPool.isSoldOut()) {
                 boolean purchased = ticketPool.removeTickets(ticketsToPurchase);
-                if (purchased) {
-                    Logger.logToConsole("Customer " + customerId + " purchased " + ticketsToPurchase + " tickets.");
-                } else {
-                    Logger.logToConsole("Customer " + customerId + " could not purchase tickets. Tickets available: " + ticketPool.getCurrentTicketsAvailable());
-                }
-                Thread.sleep(retrievalInterval); // Slow down by increasing multiplier (e.g., 3000 ms).
+                Logger.logToConsole(toString() + (purchased ? " purchased tickets." : " could not purchase tickets."));
+                Thread.sleep(retrievalInterval);
             }
-            Logger.logToConsole("Customer " + customerId + " stops trying. Tickets are sold out.");
+            Logger.logToConsole(toString() + " stops trying. Tickets are sold out.");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            Logger.logToConsole("Customer " + customerId + " was interrupted.");
+            Logger.logToConsole(toString() + " was interrupted.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Customer {" +
+                "Customer ID=" + customerId +
+                ", Tickets to Purchase=" + ticketsToPurchase +
+                '}';
     }
 }

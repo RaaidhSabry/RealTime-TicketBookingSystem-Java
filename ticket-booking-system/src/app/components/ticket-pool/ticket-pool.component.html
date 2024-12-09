@@ -1,19 +1,20 @@
 <div class="ticket-pool">
   <h2>Ticket Pool</h2>
-  <p>Current Tickets Available: <strong>{{ currentTickets }}</strong></p>
-  <p>Total Tickets Sold: <strong>{{ totalTicketsSold }}</strong></p>
 
-  <div class="controls">
-    <label for="add-tickets">Add Tickets:</label>
-    <input id="add-tickets" type="number" [(ngModel)]="ticketsToAdd" name="add-tickets" placeholder="Enter quantity"/>
-    <button (click)="addTickets()">Add</button>
+  <div class="ticket-info">
+    <p>Max Capacity: {{ maxCapacity }}</p>
+    <p>Current Available Tickets: {{ currentTickets }}</p>
   </div>
 
-  <div class="controls">
-    <label for="remove-tickets">Remove Tickets:</label>
-    <input id="remove-tickets" type="number" [(ngModel)]="ticketsToRemove" name="remove-tickets" placeholder="Enter quantity" />
-    <button (click)="removeTickets()">Remove</button>
+  <div class="ticket-actions">
+    <input type="number" [(ngModel)]="ticketsToAdd" placeholder="Tickets to Add" />
+    <button (click)="addTickets()">Add Tickets</button>
+
+    <input type="number" [(ngModel)]="ticketsToRemove" placeholder="Tickets to Remove" />
+    <button (click)="removeTickets()">Remove Tickets</button>
   </div>
 
-  <p class="message">{{ message }}</p>
+  <div class="status">
+    <p>{{ statusMessage }}</p>
+  </div>
 </div>

@@ -1,60 +1,263 @@
-.app-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: Verdana, sans-serif;
+/* General Styles */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  padding-top: 80px; /* Space for the fixed header */
+  padding-bottom: 40px; /* Space for the footer */
+  overflow-y: auto; /* Allow vertical scrolling */
+  height: 100%; /* Ensure body takes full height */
 }
 
-header {
-  margin-bottom: 20px;
+
+
+/* Main App Layout */
+.app-container {
+  font-family: 'Roboto', Arial, sans-serif;
   display: flex;
-  position: absolute;
-  top: 0;
-  width: 100%;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto; /* Allow scrolling inside the container */
+}
+
+/* Header Styles */
+header {
   background-color: #0056b3;
+  color: #fff;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-sizing: border-box;
+  height: 80px; /* Fixed header height */
+}
+
+/* Header Content */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 header h1 {
-  font-family: Verdana;
-  font-weight: bold;
-  padding-top: 20px;
-
+  margin: 0;
+  font-size: 1.5rem;
+  padding-left: 20px;
 }
 
-nav ul {
+header a:hover {
+    color: black;
+}
+
+.Head-btns {
   display: flex;
   list-style: none;
-  padding: 15px;
-}
-
-nav ul li {
-  margin-right: 60px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: bold;
-}
-
-nav ul li a:hover {
-  color: #0b1850;
-}
-
-main {
+  padding: 0;
+  margin: 0;
   width: 100%;
-  max-width: 1200px;
-  margin-top: 500px;
-  padding: 20px;
-  background-color: #f4f4f4;
-  border-radius: 8px;
+  justify-content: flex-start;
 }
 
+header nav ul li {
+  margin-left: 30px;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  background-color: #0b1850;
+}
+
+/* Main Content Area */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 100px; /* Adjusted to give space below fixed header */
+  flex-grow: 1; /* Ensure it grows to fill remaining space */
+  padding-bottom: 50px; /* Ensure content doesn't overlap footer */
+}
+
+/* Footer Styles */
 footer {
-  margin-top: 20px;
   text-align: center;
-  color: #888;
+  padding: 15px 20px;
+  background-color: #f1f1f1;
+  color: #666;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
   position: fixed;
   bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  box-sizing: border-box;
+}
 
+/* Adjusting spacing for buttons and containers */
+button {
+  margin-top: 10px;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+/* Flex Layout for the Main Container */
+.content {
+  flex: 1;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  box-sizing: border-box;
+}
+
+/* Ensure All Sections Have Adequate Spacing */
+.container {
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+h2, h3 {
+  margin-bottom: 20px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+/* Welcome Screen Styles */
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e9ecef;
+  padding: 20px;
+  text-align: center;
+}
+
+.welcome-message {
+  margin-top:30px;
+  margin-bottom: 30px;
+}
+
+.welcome-message h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.welcome-message p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.ticket-pool-counter {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+.ticket-pool-counter h2 {
+  font-size: 1.5rem;
+  color: #0056b3;
+  margin-bottom: 10px;
+}
+
+.ticket-pool-counter p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* Ensure that all sections (ticket pool, configuration, etc.) have proper spacing */
+.ticket-info, .ticket-actions {
+  margin-bottom: 20px;
+}
+
+.ticket-controller-buttons{
+  padding-left: 25px;
+}
+
+#start{
+  padding: 15px;
+  border-radius: 8px;
+  margin-right: 25px;
+  margin-top: 50px;
+}
+
+#start:hover{
+  color: white;
+  background-color: #0056b3;
+  border-color: black;
+  border-width: medium;
+}
+
+#stop{
+  padding: 15px;
+  border-radius: 8px;
+  margin-right: 25px;
+  margin-top: 50px;
+}
+
+#stop:hover{
+  color: white;
+  background-color: #0056b3;
+  border-color: black;
+  border-width: medium;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .ticket-pool-counter {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  header nav ul li {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .content {
+    padding: 20px;
+  }
 }

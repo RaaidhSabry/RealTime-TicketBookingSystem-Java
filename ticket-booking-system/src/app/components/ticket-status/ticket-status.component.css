@@ -1,0 +1,32 @@
+
+
+
+
+.ticket-pool-counter {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+.ticket-pool-counter h2 {
+  font-size: 1.5rem;
+  color: #0056b3;
+  margin-bottom: 10px;
+}
+
+.ticket-pool-counter p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .ticket-pool-counter {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+}

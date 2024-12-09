@@ -1,6 +1,5 @@
 package com.coursework.ticketbookingsystem.vendor;
 
-import com.coursework.ticketbookingsystem.configuration.Configuration;
 import com.coursework.ticketbookingsystem.configuration.Logger;
 import com.coursework.ticketbookingsystem.ticketpool.TicketPool;
 
@@ -10,11 +9,10 @@ public class Vendor implements Runnable {
     public static int releaseInterval = 5000;
     private final TicketPool ticketPool;
 
-
-    public Vendor(int vendorId, int ticketsPerRelease, int releaseInterval,TicketPool ticketPool) {
+    public Vendor(int vendorId, int ticketsPerRelease, int releaseInterval, TicketPool ticketPool) {
         this.vendorId = vendorId;
-        this.ticketsPerRelease = ticketsPerRelease;
-        this.releaseInterval = releaseInterval;
+        Vendor.ticketsPerRelease = ticketsPerRelease;
+        Vendor.releaseInterval = releaseInterval;
         this.ticketPool = ticketPool;
     }
 
@@ -28,13 +26,21 @@ public class Vendor implements Runnable {
         try {
             while (!ticketPool.isSoldOut()) {
                 ticketPool.addTickets(ticketsPerRelease);
-                Logger.logToConsole("Vendor " + vendorId + " added " + ticketsPerRelease + " tickets. Tickets available: " + ticketPool.getCurrentTicketsAvailable());
-                Thread.sleep(releaseInterval); // Slow down by increasing multiplier (e.g., 120000 ms for 2 minutes).
+                Logger.logToConsole(toString() + " added tickets.");
+                Thread.sleep(releaseInterval);
             }
-            Logger.logToConsole("Vendor " + vendorId + " stops adding tickets. Maximum capacity reached.");
+            Logger.logToConsole(toString() + " stops adding tickets.");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            Logger.logToConsole("Vendor " + vendorId + " was interrupted.");
+            Logger.logToConsole(toString() + " was interrupted.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Vendor {" +
+                "Vendor ID=" + vendorId +
+                ", Tickets Per Release=" + ticketsPerRelease +
+                '}';
     }
 }

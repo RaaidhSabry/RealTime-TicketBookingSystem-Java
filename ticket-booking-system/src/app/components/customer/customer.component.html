@@ -1,0 +1,38 @@
+<!-- Display customer's name (for header) -->
+<div *ngIf="customerName" class="customer-header">
+  <h1>{{ customerName }}</h1>
+</div>
+
+<!-- Display other customer details -->
+<div *ngIf="!isHeader" class="customer-details">
+  <!-- Customer Details Form -->
+  <div class="customer-form">
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" [(ngModel)]="phone" placeholder="Enter your phone number" />
+    </div>
+
+    <div class="form-group">
+      <label for="tickets">Number of Tickets</label>
+      <input type="number" id="tickets" [(ngModel)]="numberOfTickets" min="1" max="10" placeholder="Number of tickets" />
+    </div>
+
+    <div class="form-group">
+      <label for="paymentMethod">Payment Method</label>
+      <select id="paymentMethod" [(ngModel)]="paymentMethod">
+        <option value="creditCard">Credit Card</option>
+        <option value="debitCard">Debit Card</option>
+      </select>
+    </div>
+
+    <p>{{ ticketMessage }}</p>
+
+    <button (click)="buyTicket()" class="save-btn">Buy Ticket</button>
+  </div>
+
+  <!-- Display ticket data -->
+  <div class="ticket-info">
+    <p>Remaining Tickets: {{ remainingTickets }}</p>
+    <p>Tickets Sold: {{ ticketsSold }}</p>
+  </div>
+</div>

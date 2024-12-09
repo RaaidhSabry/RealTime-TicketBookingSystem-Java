@@ -11,11 +11,15 @@ import java.util.Scanner;
 public class TicketBookingSystemApplication {
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        // Automatically start Spring Boot Application
+        startSpringApplication();
 
+        // Enter CLI mode after starting the Spring Boot Application
+        Scanner input = new Scanner(System.in);
         int choice = 0;
+
         while (choice != 3) {
-            MainMenu();
+            displayMainMenu();
             System.out.println("Enter your choice:");
             try {
                 choice = input.nextInt();
@@ -27,10 +31,10 @@ public class TicketBookingSystemApplication {
 
             switch (choice) {
                 case 1:
-                    runCLI();
+                    runCLI(); // Perform configuration logic
                     break;
                 case 2:
-                    runSpringApplication(args);
+                    startSpringApplication();
                     break;
                 case 3:
                     System.out.println("Exiting the system.");
@@ -42,10 +46,10 @@ public class TicketBookingSystemApplication {
         }
     }
 
-    private static void MainMenu() {
+    private static void displayMainMenu() {
         System.out.println("\nWelcome to the Ticket Booking System");
-        System.out.println("Press 1 for CLI");
-        System.out.println("Press 2 for Spring Boot Application");
+        System.out.println("Press 1 for CLI Configuration");
+        System.out.println("Press 2 to Run Springboot");
         System.out.println("Press 3 to Exit");
     }
 
@@ -60,11 +64,15 @@ public class TicketBookingSystemApplication {
             System.out.print("Enter command (start/stop/show/exit): ");
             command = input.nextLine().trim().toLowerCase();
 
-            Configuration loadedConfig = null;
             switch (command) {
                 case "start":
-                    loadedConfig = Configuration.loadConfiguration("config.json");
-                    config.startTicketOperations();
+                    Configuration loadedConfig = Configuration.loadConfiguration("config.json");
+                    if (loadedConfig != null) {
+                        config.startTicketOperations();
+                        System.out.println("Loaded Max Capacity: " + loadedConfig.getMaxTicketCapacity());
+                        System.out.println("Loaded Available Tickets: " + loadedConfig.getCurrentTicketsAvailable());
+                        System.out.println("Loaded Tickets Sold: " + loadedConfig.getTicketsSold());
+                    }
                     break;
                 case "stop":
                     config.stopTicketOperations();
@@ -80,24 +88,23 @@ public class TicketBookingSystemApplication {
                 default:
                     System.out.println("Unknown command. Please enter 'start', 'stop', 'show' or 'exit'.");
             }
-
-            if (loadedConfig != null) {
-                // Display loaded configuration for verification
-                System.out.println("Loaded Max Capacity: " + loadedConfig.getMaxTicketCapacity());
-                System.out.println("Loaded Available Tickets: " + loadedConfig.getCurrentTicketsAvailable());
-                System.out.println("Loaded Tickets Sold: " + loadedConfig.getTicketsSold());
-            }
-
         }
-
-
-
     }
 
-
-    private static void runSpringApplication(String[] args) {
+    public static void startSpringApplication() {
         System.out.println("Starting Spring Boot Application...");
-        SpringApplication.run(TicketBookingSystemApplication.class, args);
-
+        try {
+            SpringApplication.run(TicketBookingSystemApplication.class);
+            System.out.println("Spring Boot Application started successfully.");
+        } catch (Exception e) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            displayMainMenu();
+            System.err.println("Enter Configuration !!");
+        }
     }
+
+
+
 }

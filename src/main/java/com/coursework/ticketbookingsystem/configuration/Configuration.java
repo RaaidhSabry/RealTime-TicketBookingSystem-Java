@@ -53,9 +53,9 @@ public class Configuration {
     }
 
     public void setCustomerRetrievalRate(int customerRetrievalRate) {
-        if(customerRetrievalRate > 0 && customerRetrievalRate <= 10){
+        if (customerRetrievalRate > 0 && customerRetrievalRate <= 10) {
             this.customerRetrievalRate = customerRetrievalRate;
-        }else {
+        } else {
             throw new IllegalArgumentException("The customer retrieval rate should be between 1 and 10 minutes.");
         }
     }
@@ -66,18 +66,17 @@ public class Configuration {
 
     public void setMaxTicketCapacity(int maxTicketCapacity) {
         if (maxTicketCapacity > 0 && maxTicketCapacity <= 5000) {
-            this.maxTicketCapacity = maxTicketCapacity;
-        }
-        else {
+            Configuration.maxTicketCapacity = maxTicketCapacity;
+        } else {
             throw new IllegalArgumentException("The max ticket capacity should be between 1 and 5000 tickets.");
         }
     }
 
-    public int getCurrentTicketsAvailable(){
+    public int getCurrentTicketsAvailable() {
         return currentTicketsAvailable;
     }
 
-    public int getTicketsSold(){
+    public int getTicketsSold() {
         return ticketsSold;
     }
 
@@ -86,29 +85,39 @@ public class Configuration {
     }
 
     public static int getCustomerRetrievalInterval() {
-        return customerRetrievalRate * 10 * 1000; // Convert seconds to milliseconds
+        return customerRetrievalRate * 1000; // Convert seconds to milliseconds
     }
 
+    @Override
+    public String toString() {
+        return "Configuration {" +
+                "Max Ticket Capacity=" + maxTicketCapacity +
+                ", Total Tickets=" + totalTickets +
+                ", Ticket Release Rate=" + ticketReleaseRate + " minutes" +
+                ", Customer Retrieval Rate=" + customerRetrievalRate + " seconds" +
+                ", Current Tickets Available=" + currentTicketsAvailable +
+                ", Tickets Sold=" + ticketsSold +
+                '}';
+    }
 
     public void start() {
         System.out.println("Running the Command Line Interface (CLI)...");
 
         Scanner input = new Scanner(System.in);
 
-        while (true){
-            try{
+        while (true) {
+            try {
                 System.out.println("Enter the Maximum Capacity for the event : ");
                 int maxTicketCapacity = input.nextInt();
                 setMaxTicketCapacity(maxTicketCapacity);
                 break;
-            }catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid input, please enter a number. ");
                 input.next();
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input, please enter a number between 1 and 5000");
             }
         }
-
 
         while (true) {
             try {
@@ -120,7 +129,7 @@ public class Configuration {
                 System.out.println("Invalid input, please enter a number.");
                 input.next();
             } catch (IllegalArgumentException e) {
-                System.out.println("Invalid Input, please enter a number within the Maximum Ticket Capacity! .... Maximum Ticket Capacity = "+ maxTicketCapacity);
+                System.out.println("Invalid Input, please enter a number within the Maximum Ticket Capacity! .... Maximum Ticket Capacity = " + maxTicketCapacity);
             }
         }
 
@@ -147,16 +156,13 @@ public class Configuration {
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input, please enter a number.");
                 input.next();
-            } catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println("Invalid Input, please enter a number within the range (1-10 seconds)!");
             }
         }
 
-        System.out.println("Configuration complete.");
-        System.out.println("Maximum Ticket Capacity = " + getMaxTicketCapacity() + " tickets");
-        System.out.println("Total Tickets available in first release : " + getTotalTickets() + " tickets");
-        System.out.println("Ticket Release Rate: " + getTicketReleaseRate() + " minutes");
-        System.out.println("Customer Retrieval Rate: " + getCustomerRetrievalRate() + " seconds");
+        System.out.println("Configuration complete:");
+        System.out.println(this); // Using the overridden toString() method
     }
 
     public void startTicketOperations() {
@@ -173,15 +179,14 @@ public class Configuration {
                             if (remainingCapacity > 0) {
                                 int ticketsToAdd = Math.min(Vendor.ticketsPerRelease, remainingCapacity);
                                 currentTicketsAvailable += ticketsToAdd;
-                                System.out.println(ticketsToAdd + " tickets released. Current available tickets: " + currentTicketsAvailable);
+                                System.out.println(this); // Log the current configuration state
                                 logTransaction("Released " + ticketsToAdd + " tickets.");
                             } else {
                                 System.out.println("Maximum ticket capacity reached. No more tickets will be released.");
                                 break;
                             }
                         }
-                        // Convert ticket release rate from minutes to milliseconds
-                        Thread.sleep(getTicketReleaseInterval()); // Multiply by 60 seconds and 1000 milliseconds
+                        Thread.sleep(getTicketReleaseInterval());
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
@@ -195,18 +200,17 @@ public class Configuration {
                     while (isRunning) {
                         synchronized (this) {
                             if (currentTicketsAvailable > 0) {
-                                int ticketsToBuy = Math.min(Customer.ticketsToPurchase, currentTicketsAvailable); // Customer buys 1 ticket at a time
+                                int ticketsToBuy = Math.min(Customer.ticketsToPurchase, currentTicketsAvailable);
                                 currentTicketsAvailable -= ticketsToBuy;
-                                ticketsSold += ticketsToBuy; // Increase the tickets sold count
-                                System.out.println("Customer purchased " + ticketsToBuy + " ticket(s). Tickets remaining: " + currentTicketsAvailable);
+                                ticketsSold += ticketsToBuy;
+                                System.out.println(this); // Log the current configuration state
                                 logTransaction("Sold " + ticketsToBuy + " ticket(s).");
                             } else {
                                 System.out.println("No tickets available for purchase.");
                                 break;
                             }
                         }
-                        // Convert customer retrieval rate from seconds to milliseconds
-                        Thread.sleep(getCustomerRetrievalInterval()); // Multiply by 1000 to convert seconds to milliseconds
+                        Thread.sleep(getCustomerRetrievalInterval());
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
@@ -232,8 +236,7 @@ public class Configuration {
     }
 
     public void showTicketOperations() {
-        System.out.println("Tickets sold so far: " + ticketsSold);
-        System.out.println("Tickets remaining: " + currentTicketsAvailable);
+        System.out.println(this); // Using the overridden toString() method
     }
 
     // Save the configuration as a JSON file

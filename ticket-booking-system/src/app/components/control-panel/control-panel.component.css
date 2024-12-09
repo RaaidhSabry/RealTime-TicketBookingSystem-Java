@@ -1,0 +1,65 @@
+.ticket-controller-buttons {  flex: 1; /* Makes the component flexible */
+  background-color: #fff;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+
+
+.heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 10px;
+}
+
+.status-text {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-bottom: 30px;
+}
+
+.button-container {
+  display: flex;
+  padding-top: 40px;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.control-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+}
+
+.control-btn:active {
+  transform: scale(0.98);
+}
+
+.start-btn {
+  background: #007bff; /* Blue shade for start button */
+  border: 2px solid #0056b3;
+}
+
+.start-btn:hover {
+  background: #0056b3;
+  border: 2px solid #007bff;
+}
+
+.stop-btn {
+  background: #17a2b8; /* Lighter blue for stop button */
+  border: 2px solid #117a8b;
+}
+
+.stop-btn:hover {
+  background: #117a8b;
+  border: 2px solid #17a2b8;
+}

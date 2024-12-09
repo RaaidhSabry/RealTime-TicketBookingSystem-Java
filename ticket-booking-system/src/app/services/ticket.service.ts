@@ -1,41 +1,81 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TicketService {
-  private apiUrl = ''; // Backend URL
-  getCurrentTickets(): Promise<number> {
-    return axios.get(`${this.apiUrl}/currentTickets`).then((res) => res.data);
+  private apiUrl = 'http://localhost:8080/api/ticket';
 
+  constructor(private http: HttpClient) {}
+
+  // Add tickets to the pool
+  addTickets(numberOfTickets: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/add`, { numberOfTickets });
   }
 
-  addTickets(quantity: number): Promise<string> {
-    return axios
-      .post(`${this.apiUrl}/addTickets`, { quantity })
-      .then((res) => res.data);
+  // Remove tickets from the pool
+  removeTickets(numberOfTickets: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/remove`, { numberOfTickets });
   }
 
-  removeTickets(quantity: number): Promise<string> {
-    return axios
-      .post(`${this.apiUrl}/removeTickets`, { quantity })
-      .then((res) => res.data);
+  // Get ticket info
+  getTicketInfo(): Observable<{ remainingTickets: number }> {
+    return this.http.get<{ remainingTickets: number }>(`${this.apiUrl}/info`);
   }
 
-  getLogs(): Promise<string[]> {
-    return axios.get(`${this.apiUrl}/logs`).then((res) => res.data);
+  // Buy tickets
+  buyTickets(requestPayload: {
+    customerName: string;
+    phone: string;
+    numberOfTickets: number;
+    paymentMethod: string;
+  }): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/customer/buy`, requestPayload);
   }
 
-  updateMaxCapacity(maxCapacity: number): Promise<string> {
-    return axios
-      .post(`${this.apiUrl}/updateMaxCapacity`, { capacity: maxCapacity })
-      .then((res) => res.data);
+  // Update configuration (use new endpoint `/update` from the backend)
+  updateConfiguration(configuration: {
+    maxTicketCapacity: number;
+    totalTickets: number;
+    ticketReleaseRate: number;
+    customerRetrievalRate: number;
+  }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/configuration`, configuration);
   }
 
-  getTotalTicketsSold(): Promise<number> {
-    return axios
-      .get(`${this.apiUrl}/totalTicketsSold`)
-      .then((res) => res.data);
+
+  getTicketStatus(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/status`);
   }
+
+  startTicketOperations(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/start`, {});
+  }
+
+  stopTicketOperations(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/stop`, {});
+  }
+
+  resetTicketOperations(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset`, {});
+  }
+
+  saveConfiguration(config: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/saveConfig`, config);
+  }
+
+  startSystem(): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>('http://localhost:8080/api/system/start', {});
+  }
+
+  stopSystem(): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>('http://localhost:8080/api/system/stop', {});
+  }
+
+  getSystemStatus(): Observable<any> {
+    return this.http.post(`http://localhost:8080/api/system/status`, {});
+  }
+
 }

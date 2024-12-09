@@ -1,48 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
-import { TicketPoolComponent } from './components/ticket-pool/ticket-pool.component';
-import { VendorComponent } from './components/vendor/vendor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { TicketPoolComponent } from './components/ticket-pool/ticket-pool.component';
+import { VendorComponent } from './components/vendor/vendor.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
+import { TicketService } from './services/ticket.service';
+import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {SignupComponent} from './components/signup/signup.component';
-import {LoginComponent} from './components/login/login.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TicketPoolComponent,  // Declare all your components here
-    VendorComponent,
-  ],
+  declarations: [],
   imports: [
+    AppComponent,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    BrowserModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatButtonModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     TicketPoolComponent,
     SignupComponent,
     LoginComponent,
-    RouterModule,
-    RouterModule,
-    TicketPoolComponent,
+    VendorComponent
   ],
-  providers: [],
-  bootstrap: [],
-  exports: []
+  providers: [TicketService, AuthService],
+  bootstrap: []
 })
 export class AppModule {}

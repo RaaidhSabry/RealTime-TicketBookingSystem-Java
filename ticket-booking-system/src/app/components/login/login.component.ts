@@ -1,39 +1,55 @@
 import { Component } from '@angular/core';
-import {MatFormField} from '@angular/material/form-field';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
-import { Router } from '@angular/router';
-import { MatDialogModule } from '@angular/material/dialog';
-import {MatDialogActions, MatDialogContent} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [
-    MatFormField,
-    MatFormFieldModule,  // Import this
-    MatInputModule,      // Import this
-    MatButtonModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatDialogActions,
-    MatDialogContent,
-  ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  standalone: true,
+  imports: [FormsModule],
+  styleUrls: ['./login.component.css'],
 })
-
 export class LoginComponent {
-  username = '';
-  password = '';
+  email: string = '';
+  password: string = '';
+  role: string = '';
 
-  constructor() {}
+  constructor(
+    private dialogRef: MatDialogRef<LoginComponent>,
+    private authService: AuthService
+  ) {}
 
-  closeLogin() {
-    console.log('Login dialog submitted!');
+  onLogin() {
+    if (!this.email || !this.password || !this.role) {
+      alert('Please fill in all fields before logging in.');
+      return;
+    }
+
+    const user = { email: this.email, password: this.password, role: this.role };
+
+    this.authService.login(user).subscribe(
+      () => {
+        alert('Login successful!');
+        this.dialogRef.close({ role: this.role }); // Pass role for further actions
+      },
+      (err) => {
+        console.error('Login error:', err);
+
+        // Handle errors based on status codes
+        if (err.status === 400) {
+          alert('Invalid email, password, or role. Please try again.');
+        } else if (err.status === 500) {
+          alert('Server error. Please try again later.');
+        } else {
+          alert('Unexpected error occurred. Please contact support.');
+        }
+      }
+    );
+  }
+
+
+  onCancel() {
+    this.dialogRef.close();
   }
 }

@@ -1,35 +1,78 @@
 import { Component } from '@angular/core';
-import {MatFormField} from '@angular/material/form-field';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDialogActions, MatDialogClose} from '@angular/material/dialog';
+import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-signup',
-  standalone: true,
-  imports: [
-    MatFormField,
-    MatFormFieldModule,  // Import this
-    MatInputModule,      // Import this
-    MatButtonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatDialogClose,
-    MatDialogActions,
-  ],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  standalone: true,
+  imports: [FormsModule],
+  styleUrls: ['./signup.component.css'],
 })
-
 export class SignupComponent {
-  fullName: string = '';  // Initialize with an empty string
-  email: string = '';     // Initialize with an empty string
-  password: string = '';  // Initialize with an empty string
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  role: string = '';
 
-  onSubmit() {
-    // Handle signup logic here (e.g., HTTP call to register user)
-    console.log('Form submitted', { fullName: this.fullName, email: this.email, password: this.password });
+  constructor(
+    private dialogRef: MatDialogRef<SignupComponent>,
+    private authService: AuthService
+  ) {}
+
+  onSignup() {
+    if (!this.name || !this.email || !this.password || !this.role) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    if (!this.email.includes('@')) {
+      alert('Invalid email. Please enter a valid email address.');
+      return;
+    }
+
+    if (this.password !== this.confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+
+    const user = {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+      role: this.role,
+    };
+
+    this.authService.signup(user).subscribe(
+      () => {
+        // Success block; no need to check response.status
+        alert('Signup successful!');
+        this.dialogRef.close(); // Close the signup dialog
+      },
+      (err) => {
+        console.error('Signup error:', err);
+
+        // Handle errors based on status codes
+        if (err.status === 400 && err.error === 'Email already registered') {
+          alert('Email already registered. Please use a different email.');
+        } else if (err.status === 400) {
+          alert('Invalid inputs. Please check your details and try again.');
+        } else if (err.status === 403) {
+          alert('Access is forbidden. Check your permissions.');
+        } else if (err.status === 404) {
+          alert('Signup endpoint not found. Contact support.');
+        } else if (err.status === 500) {
+          alert('Server error. Please try again later.');
+        } else {
+          alert(`Unexpected error: ${err.message}`);
+        }
+      }
+    );
+  }
+
+  onCancel() {
+    this.dialogRef.close();
   }
 }
