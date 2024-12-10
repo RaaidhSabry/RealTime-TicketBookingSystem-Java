@@ -42,69 +42,73 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 ### Frontend
 
 - Angular: GUI development for real-time monitoring and control.
-- RxJS: State management for real-time updates.
 
 ### Other Tools
 
-- Multi-threading: For producer-consumer logic.
-- Synchronization: Ensures thread-safe operations on shared resources.
 - Git: Version control.
 
 ## System_Architecture
-The project follows a modular architecture:
 
-Java CLI:
+### Java CLI:
 
-Handles ticket system configuration and multi-threaded operations.
+- Handles ticket system configuration and multi-threaded operations.
 
-Backend (Spring Boot):
+### Backend (Spring Boot):
 
-Manages API endpoints for ticket operations and data updates.
-Stores persistent data in JSON files.
+- Manages API endpoints for ticket operations and data updates.
+- Stores persistent data in JSON files.
 
-Frontend (Angular):
+### Frontend (Angular):
 
-Provides a user-friendly interface for interacting with the system.
+- Provides a user-friendly interface for interacting with the system.
 
 ## Installation_and_Setup
 
-Prerequisites
+### Prerequisites
 
-Java 17 or later
-Maven: For building the Spring Boot backend.
-Node.js and npm: For Angular frontend.
-Git: For cloning the repository.
+- Java 17 or later
+- Maven: For building the Spring Boot backend.
+- Node.js and npm: For Angular frontend.
+- Git: For cloning the repository.
 
-Steps
+### Steps
 
-Clone the Repository
-bash
-Copy code
-git clone https://github.com/your-repo/ticket-booking-system.git
-cd ticket-booking-system
-Backend Setup
+- Clone the Repository
+- bash
 
-Navigate to the backend folder:
-bash
-Copy code
-cd backend
+### Copy code
+    git clone https://github.com/your-repo/ticket-booking-system.git
+    cd ticket-booking-system
+
+### Backend Setup
+
+- Navigate to the backend folder:
+- bash
+
+### Copy code
+    cd backend
+
 Build and run the Spring Boot application:
 bash
-Copy code
-mvn clean install
-mvn spring-boot:run
-Frontend Setup
+
+### Copy code
+    mvn clean install
+    mvn spring-boot:run
+
+### Frontend Setup
 
 Navigate to the Angular frontend folder:
 bash
-Copy code
-cd frontend
-Install dependencies and start the Angular development server:
-bash
-Copy code
-npm install
-ng serve
-Run the CLI
+
+### Copy code
+    cd frontend
+    Install dependencies and start the Angular development server:
+    bash
+
+### Copy code
+    npm install
+    ng serve
+    Run the CLI
 
 Navigate to the Java CLI folder:
 bash
