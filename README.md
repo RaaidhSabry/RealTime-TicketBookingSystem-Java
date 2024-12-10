@@ -9,7 +9,7 @@ A multi-threaded ticket booking system that supports real-time ticket management
 - [System Architecture](#System_Architecture)
 - [Installation and Setup](#Installation_and_Setup)
 - [How to Use](#How_to_Use)
-- [Authors](#License)
+- [Authors](#Authors)
 
 ## Project_Overview
 
@@ -85,33 +85,38 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 ##
     cd ticketBookingSystem
 
-Build and run the Spring Boot application:
+- Build and run the Spring Boot application:
 
+##
     mvn clean install
     mvn spring-boot:run
 
 ### Frontend Setup
 
-Navigate to the Angular frontend folder:
+- Navigate to the Angular frontend folder:
 
+##
     cd ticket-booking-system
     
-Install dependencies and start the Angular development server:
+- Install dependencies and start the Angular development server:
 
+##
     npm install
     ng serve
     
 ### Run the CLI
 
-Compile and run the CLI application:
+- Compile and run the CLI application:
 
+##
     javac *.java
     java Main
 
 ### Access the Application
 
-Open your browser and navigate to:
+- Open your browser and navigate to:
 
+##
     http://localhost:4200
 
 ### How to Use CLI
@@ -130,15 +135,15 @@ Open your browser and navigate to:
 
 Access RESTful endpoints for advanced operations:
 
-- Add tickets: POST /api/tickets/add
-- Remove tickets: POST /api/tickets/remove
-- View status: GET /api/tickets/status
+- Buy tickets: POST /api/tickets/customer/buy
+- Ticket Status: POST /api/tickets/info
 
+## Authors
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This README file provides all necessary details for setup, usage and understanding of the project.
 
-This README file provides all necessary details for setup, usage, and understanding your project. Customize it further with your specifics!
+M.Raaidh Sabry
+Cheers !!
 
 
 
