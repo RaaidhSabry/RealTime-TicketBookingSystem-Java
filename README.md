@@ -76,7 +76,7 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 - Clone the Repository
 
 ##
-    git clone https://github.com/your-repo/ticket-booking-system.git
+    git clone https://github.com/your-repo/ticketBookingSystem.git
 
 ### Backend Setup
 
