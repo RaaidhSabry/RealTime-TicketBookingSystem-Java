@@ -28,7 +28,7 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 ### Additional Features
 
 - Input validation for configuration settings.
-- Real-time synchronization between CLI, backend, and frontend.
+- Real-time synchronization between CLI, backend and frontend.
 - Logs all activities for audit and debugging.
 
 ## Technologies_Used
