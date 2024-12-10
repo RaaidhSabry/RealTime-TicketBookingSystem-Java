@@ -12,7 +12,7 @@ A multi-threaded ticket booking system that supports real-time ticket management
 [Future Enhancements](#FutureEnhancements)
 [Authors](#Authors)
 
-# Project Overview 
+## Project Overview(#ProjectOverview) 
 
 The Ticket Booking System is a producer-consumer-based application that allows vendors to add tickets to a shared ticket pool and customers to retrieve tickets in real time. It uses synchronization techniques to ensure thread safety and provides a graphical user interface for better user experience.
 
