@@ -17,17 +17,19 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 
 ## Features
 
-Core Features
+### Core Features
 
-System Configuration: Configure total tickets, ticket release rate, customer retrieval rate, and maximum ticket capacity.
-Producer-Consumer Pattern: Utilizes Java threading for vendors and customers accessing the shared ticket pool.
-Real-Time Monitoring: Displays the ticket pool status and logs all ticket transactions.
-Frontend GUI: Angular-based interface for configuration, real-time status display, and control.
-Backend API: Spring Boot RESTful API for ticket operations and data management.
-Additional Features
-Input validation for configuration settings.
-Real-time synchronization between CLI, backend, and frontend.
-Logs all activities for audit and debugging.
+- System Configuration: Configure total tickets, ticket release rate, customer retrieval rate, and maximum ticket capacity.
+- Producer-Consumer Pattern: Utilizes Java threading for vendors and customers accessing the shared ticket pool.
+- Real-Time Monitoring: Displays the ticket pool status and logs all ticket transactions.
+- Frontend GUI: Angular-based interface for configuration, real-time status display, and control.
+- Backend API: Spring Boot RESTful API for ticket operations and data management.
+
+### Additional Features
+
+- Input validation for configuration settings.
+- Real-time synchronization between CLI, backend, and frontend.
+- Logs all activities for audit and debugging.
 
 ## Technologies_Used
 
