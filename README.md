@@ -142,7 +142,7 @@ Access RESTful endpoints for advanced operations:
 
 This README file provides all necessary details for setup, usage and understanding of the project.
 
-M.Raaidh Sabry
+M.Raaidh Sabry <br>
 Cheers !!
 
 
