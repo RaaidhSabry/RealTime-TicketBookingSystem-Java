@@ -15,7 +15,7 @@ public class SystemController {
 
     // start button
     @PostMapping("/api/system/start")
-    public synchronized ResponseEntity<Map<String, String>> startSystemFromFrontend() {
+    public synchronized ResponseEntity<Map<String, String>> startSystem() {
         Map<String, String> response = new HashMap<>();
         try {
             if (areLogsRunning) {
@@ -38,7 +38,7 @@ public class SystemController {
 
     // stop button
     @PostMapping("/api/system/stop")
-    public synchronized ResponseEntity<Map<String, String>> stopLogs() {
+    public synchronized ResponseEntity<Map<String, String>> stopSystem() {
         Map<String, String> response = new HashMap<>();
         try {
             if (!areLogsRunning) {
