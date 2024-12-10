@@ -33,20 +33,22 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 
 ## Technologies_Used
 
-Backend
+### Backend
 
-Java CLI: Core system implementation.
-Spring Boot: Backend logic and API development.
-JSON: Data persistence for user and ticket details.
+- Java CLI: Core system implementation.
+- Spring Boot: Backend logic and API development.
+- JSON: Data persistence for user and ticket details.
 
-Frontend
+### Frontend
 
-Angular: GUI development for real-time monitoring and control.
-RxJS: State management for real-time updates.
-Other Tools
-Multi-threading: For producer-consumer logic.
-Synchronization: Ensures thread-safe operations on shared resources.
-Git: Version control.
+- Angular: GUI development for real-time monitoring and control.
+- RxJS: State management for real-time updates.
+
+### Other Tools
+
+- Multi-threading: For producer-consumer logic.
+- Synchronization: Ensures thread-safe operations on shared resources.
+- Git: Version control.
 
 ## System_Architecture
 The project follows a modular architecture:
