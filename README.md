@@ -3,13 +3,13 @@
 A multi-threaded ticket booking system that supports real-time ticket management, configuration, and monitoring. This project is implemented using a Java CLI for core functionalities, a Spring Boot backend, and an Angular-based frontend GUI.
 
 ### Table of Contents
-[Project Overview] (#Project Overview)
+[Project Overview](#ProjectOverview)
 [Features](#Features)
-[Technologies Used](#Technologies Used)
-[System Architecture](#System Architecture)
-[Installation and Setup](#Installation and Setup)
-[How to Use](#How to Use)
-[Future Enhancements](#Future Enhancements)
+[Technologies Used](#TechnologiesUsed)
+[System Architecture](#SystemArchitecture)
+[Installation and Setup](#InstallationAndSetup)
+[How to Use](#HowtoUse)
+[Future Enhancements](#FutureEnhancements)
 [Authors](#Authors)
 
 # Project Overview 
