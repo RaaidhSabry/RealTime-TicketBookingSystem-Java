@@ -104,14 +104,6 @@ The Ticket Booking System is a producer-consumer-based application that allows v
     npm install
     ng serve
     
-### Run the CLI
-
-- Compile and run the CLI application:
-
-##
-    javac *.java
-    java Main
-
 ### Access the Application
 
 - Open your browser and navigate to:
