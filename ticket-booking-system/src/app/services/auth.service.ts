@@ -19,7 +19,4 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, user, { responseType: 'text' as 'json'});
   }
 
-  getUserByEmail(email: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/?email=${email}`);
-  }
 }

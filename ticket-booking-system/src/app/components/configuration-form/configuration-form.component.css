@@ -6,12 +6,12 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns */
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
 .form-title {
-  grid-column: span 2; /* Make title span across both columns */
+  grid-column: span 2;
   font-size: 24px;
   text-align: center;
   color: #333;
@@ -48,7 +48,7 @@
 }
 
 .save-btn {
-  grid-column: span 2; /* Make button span across both columns */
+  grid-column: span 2;
   width: 100%;
   padding: 15px;
   background-color: #007bff;
@@ -70,7 +70,7 @@
 
 @media (max-width: 768px) {
   .configuration-form {
-    grid-template-columns: 1fr; /* Single column on smaller screens */
+    grid-template-columns: 1fr;
   }
 
   .save-btn {

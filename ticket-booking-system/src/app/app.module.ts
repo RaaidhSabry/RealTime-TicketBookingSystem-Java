@@ -6,8 +6,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { TicketPoolComponent } from './components/ticket-pool/ticket-pool.component';
-import { VendorComponent } from './components/vendor/vendor.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { TicketService } from './services/ticket.service';
@@ -26,10 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    TicketPoolComponent,
     SignupComponent,
     LoginComponent,
-    VendorComponent
   ],
   providers: [TicketService, AuthService],
   bootstrap: []

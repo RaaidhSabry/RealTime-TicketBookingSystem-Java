@@ -15,7 +15,7 @@ public class VendorService {
     @PostConstruct
     public void startVendors() throws InterruptedException {
         for (int i = 0; i < 5; i++) {
-            Vendor vendor = new Vendor(i + 1 , ticketPool); // Example parameters
+            Vendor vendor = new Vendor(i + 1 , ticketPool);
             new Thread(vendor).start();
         }
         Thread.sleep(Configuration.getTicketReleaseInterval());

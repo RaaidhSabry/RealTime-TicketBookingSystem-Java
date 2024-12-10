@@ -13,6 +13,7 @@ public class SystemController {
 
     private boolean areLogsRunning = false;
 
+    // start button
     @PostMapping("/api/system/start")
     public synchronized ResponseEntity<Map<String, String>> startSystemFromFrontend() {
         Map<String, String> response = new HashMap<>();
@@ -34,6 +35,8 @@ public class SystemController {
         }
     }
 
+
+    // stop button
     @PostMapping("/api/system/stop")
     public synchronized ResponseEntity<Map<String, String>> stopLogs() {
         Map<String, String> response = new HashMap<>();
@@ -43,7 +46,6 @@ public class SystemController {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
             }
 
-            // Stop logs and simulate returning to the main menu
             System.out.println("Stopping logs and returning to the main menu...");
             areLogsRunning = false;
 

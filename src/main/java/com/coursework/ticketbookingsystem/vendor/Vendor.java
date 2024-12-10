@@ -21,6 +21,7 @@ public class Vendor implements Runnable {
         this.ticketPool = ticketPool;
     }
 
+    // run thread of vendor
     @Override
     public void run() {
         try {
@@ -38,9 +39,6 @@ public class Vendor implements Runnable {
 
     @Override
     public String toString() {
-        return "Vendor {" +
-                "Vendor ID=" + vendorId +
-                ", Tickets Per Release=" + ticketsPerRelease +
-                '}';
+        return "Vendor {" + "Vendor ID=" + vendorId + ", Tickets Per Release=" + ticketsPerRelease + '}';
     }
 }

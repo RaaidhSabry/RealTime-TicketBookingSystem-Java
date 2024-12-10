@@ -13,13 +13,12 @@ import java.util.Scanner;
 
 public class Configuration {
     public static int maxTicketCapacity;
-    public static int totalTicketsSold;
     public static int ticketReleaseRate;
     public static int customerRetrievalRate;
     private int totalTickets;
-    private boolean isRunning = false; // Flag to control the ticket operations
-    public static int currentTicketsAvailable; // Track current available tickets
-    private int ticketsSold = 0; // Track total tickets sold
+    private boolean isRunning = false;
+    public static int currentTicketsAvailable;
+    private int ticketsSold = 0;
 
     public Configuration() {}
 
@@ -27,6 +26,7 @@ public class Configuration {
         return totalTickets;
     }
 
+    //validation for total tickets
     public void setTotalTickets(int totalTickets) {
         if (totalTickets > 0 && totalTickets <= maxTicketCapacity) {
             this.totalTickets = totalTickets;
@@ -40,6 +40,7 @@ public class Configuration {
         return ticketReleaseRate;
     }
 
+    // validation for ticket release rate
     public void setTicketReleaseRate(int ticketReleaseRate) {
         if (ticketReleaseRate > 0 && ticketReleaseRate <= 5) {
             this.ticketReleaseRate = ticketReleaseRate;
@@ -52,6 +53,7 @@ public class Configuration {
         return customerRetrievalRate;
     }
 
+    // validation for customer retrieval rate
     public void setCustomerRetrievalRate(int customerRetrievalRate) {
         if (customerRetrievalRate > 0 && customerRetrievalRate <= 10) {
             this.customerRetrievalRate = customerRetrievalRate;
@@ -64,6 +66,7 @@ public class Configuration {
         return maxTicketCapacity;
     }
 
+    // validation for max ticket capacity
     public void setMaxTicketCapacity(int maxTicketCapacity) {
         if (maxTicketCapacity > 0 && maxTicketCapacity <= 5000) {
             Configuration.maxTicketCapacity = maxTicketCapacity;
@@ -80,24 +83,20 @@ public class Configuration {
         return ticketsSold;
     }
 
+    //release interval
     public static int getTicketReleaseInterval() {
-        return ticketReleaseRate * 60 * 1000; // Convert minutes to milliseconds
+        return ticketReleaseRate * 60 * 1000;
     }
 
+
+    //retrieval interval
     public static int getCustomerRetrievalInterval() {
-        return customerRetrievalRate * 1000; // Convert seconds to milliseconds
+        return customerRetrievalRate * 1000;
     }
 
     @Override
     public String toString() {
-        return "Configuration {" +
-                "Max Ticket Capacity=" + maxTicketCapacity +
-                ", Total Tickets=" + totalTickets +
-                ", Ticket Release Rate=" + ticketReleaseRate + " minutes" +
-                ", Customer Retrieval Rate=" + customerRetrievalRate + " seconds" +
-                ", Current Tickets Available=" + currentTicketsAvailable +
-                ", Tickets Sold=" + ticketsSold +
-                '}';
+        return "Configuration {" + "Max Ticket Capacity=" + maxTicketCapacity + ", Current Tickets Available=" + currentTicketsAvailable + ", Tickets Sold=" + ticketsSold + '}';
     }
 
     public void start() {
@@ -162,7 +161,7 @@ public class Configuration {
         }
 
         System.out.println("Configuration complete:");
-        System.out.println(this); // Using the overridden toString() method
+        System.out.println(this);
     }
 
     public void startTicketOperations() {
@@ -179,7 +178,7 @@ public class Configuration {
                             if (remainingCapacity > 0) {
                                 int ticketsToAdd = Math.min(Vendor.ticketsPerRelease, remainingCapacity);
                                 currentTicketsAvailable += ticketsToAdd;
-                                System.out.println(this); // Log the current configuration state
+                                System.out.println(this);
                                 logTransaction("Released " + ticketsToAdd + " tickets.");
                             } else {
                                 System.out.println("Maximum ticket capacity reached. No more tickets will be released.");
@@ -203,7 +202,7 @@ public class Configuration {
                                 int ticketsToBuy = Math.min(Customer.ticketsToPurchase, currentTicketsAvailable);
                                 currentTicketsAvailable -= ticketsToBuy;
                                 ticketsSold += ticketsToBuy;
-                                System.out.println(this); // Log the current configuration state
+                                System.out.println(this);
                                 logTransaction("Sold " + ticketsToBuy + " ticket(s).");
                             } else {
                                 System.out.println("No tickets available for purchase.");
@@ -236,7 +235,7 @@ public class Configuration {
     }
 
     public void showTicketOperations() {
-        System.out.println(this); // Using the overridden toString() method
+        System.out.println(this);
     }
 
     // Save the configuration as a JSON file

@@ -21,6 +21,7 @@ public class Customer implements Runnable {
         this.ticketPool = ticketPool;
     }
 
+    // run thread for customer
     @Override
     public void run() {
         try {
@@ -38,9 +39,6 @@ public class Customer implements Runnable {
 
     @Override
     public String toString() {
-        return "Customer {" +
-                "Customer ID=" + customerId +
-                ", Tickets to Purchase=" + ticketsToPurchase +
-                '}';
+        return "Customer {" + "Customer ID=" + customerId + ", Tickets to Purchase=" + ticketsToPurchase + '}';
     }
 }

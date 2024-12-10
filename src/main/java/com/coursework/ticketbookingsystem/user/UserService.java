@@ -19,6 +19,7 @@ public class UserService {
         this.objectMapper = objectMapper;
     }
 
+    // get all users
     public List<User> getAllUsers() throws IOException {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
@@ -27,12 +28,14 @@ public class UserService {
         return objectMapper.readValue(file, new TypeReference<List<User>>() {});
     }
 
+    // save user
     public void saveUser(User user) throws IOException {
         List<User> users = getAllUsers();
         users.add(user);
         objectMapper.writeValue(new File(FILE_PATH), users);
     }
 
+    // find user
     public User findByEmail(String email) throws IOException {
         List<User> users = getAllUsers();
         for (User user : users) {

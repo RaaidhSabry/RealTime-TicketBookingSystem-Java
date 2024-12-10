@@ -1,12 +1,11 @@
-.ticket-controller-buttons {  flex: 1; /* Makes the component flexible */
+.ticket-controller-buttons {
+  flex: 1;
   background-color: #fff;
   margin-top: 20px;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-
-
 
 .heading {
   font-size: 2rem;
@@ -45,7 +44,7 @@
 }
 
 .start-btn {
-  background: #007bff; /* Blue shade for start button */
+  background: #007bff;
   border: 2px solid #0056b3;
 }
 
@@ -55,7 +54,7 @@
 }
 
 .stop-btn {
-  background: #17a2b8; /* Lighter blue for stop button */
+  background: #17a2b8;
   border: 2px solid #117a8b;
 }
 

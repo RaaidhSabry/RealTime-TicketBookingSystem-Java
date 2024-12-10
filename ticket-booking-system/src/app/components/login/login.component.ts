@@ -31,12 +31,11 @@ export class LoginComponent {
     this.authService.login(user).subscribe(
       () => {
         alert('Login successful!');
-        this.dialogRef.close({ role: this.role }); // Pass role for further actions
+        this.dialogRef.close({ role: this.role });
       },
       (err) => {
         console.error('Login error:', err);
 
-        // Handle errors based on status codes
         if (err.status === 400) {
           alert('Invalid email, password, or role. Please try again.');
         } else if (err.status === 500) {
@@ -47,7 +46,6 @@ export class LoginComponent {
       }
     );
   }
-
 
   onCancel() {
     this.dialogRef.close();

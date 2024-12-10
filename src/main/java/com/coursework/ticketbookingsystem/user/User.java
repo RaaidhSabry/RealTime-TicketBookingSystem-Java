@@ -6,7 +6,6 @@ public class User {
     private String password;
     private String role;
 
-    // Getters and Setters
     public String getName() {
         return name;
     }

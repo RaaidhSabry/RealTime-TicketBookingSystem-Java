@@ -1,13 +1,11 @@
 <div class="app-container">
   <header>
     <div class="header-content">
-      <a (click)="onLogout()" style="cursor: pointer; font-size: 24px; text-decoration: none;">
-        Ticket Booking System
-      </a>
+      <a (click)="onLogout()" style="cursor: pointer; font-size: 24px; text-decoration: none;"> DecemberFest </a>
       <nav>
         <ul>
           <div *ngIf="role === 'customer'">
-            <!-- Display ticket purchasing functionality for customers -->
+            <!-- Display ticket purchasing for customers -->
             <app-customer [customerName]="customerName" [isHeader]="true"></app-customer>
           </div>
 
@@ -25,20 +23,15 @@
       <div class="space"></div>
 
       <div class="welcome-message">
-        <h1>Welcome to the Ticket Booking System</h1>
-        <p>Here you can book tickets for various events. Stay tuned for more updates!</p>
+        <h1>Welcome to the DecemberFest Booking System</h1>
+        <p>Here you can book tickets for the DecemberFest event. Stay tuned for more updates!</p>
       </div>
 
-
       <app-ticket-status></app-ticket-status>
-
 
       <section *ngIf="!role">
         <app-control-panel></app-control-panel>
       </section>
-
-
-
 
       <div *ngIf="role === 'customer'">
           <br>
@@ -48,20 +41,12 @@
         <div *ngIf="role === 'vendor'">
           <!-- Display configuration settings for vendors -->
           <br>
-          <app-configuration-form></app-configuration-form>  <!-- Your vendor component here -->
+          <app-configuration-form></app-configuration-form>
         </div>
       </div>
-
-
-<!--      <div class="ticket-controller-buttons">-->
-<!--        <h1>Ticket System Control</h1>-->
-<!--        <h2>Status: {{ systemStatus }}</h2>-->
-<!--      <button id = "start" (click)="startSystem()">Start System</button>-->
-<!--      <button id = "stop" (click)="stopSystem()">Stop System</button>-->
-<!--      </div>-->
   </main>
 
   <footer>
-    <p>&copy; 2024 Ticket Booking System. All rights reserved.</p>
+    <p>&copy; 2024 DecemberFest Booking System. All rights reserved.</p>
   </footer>
 </div>

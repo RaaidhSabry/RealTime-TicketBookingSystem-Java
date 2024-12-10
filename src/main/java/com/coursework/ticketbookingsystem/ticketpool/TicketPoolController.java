@@ -17,24 +17,24 @@ public class TicketPoolController {
     private TicketPoolService ticketPoolService;
 
     @Autowired
-    private TicketPool ticketPool;  // Autowire TicketPool instance
+    private TicketPool ticketPool;
 
-    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(TicketPoolController.class); // Logger instance
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(TicketPoolController.class);
 
     @GetMapping("/info")
     public ResponseEntity<Map<String, Integer>> getTicketInfo() {
-        int remainingTickets = ticketPool.getCurrentTicketsForSale(); // Get current tickets from the shared TicketPool instance
+        int remainingTickets = ticketPool.getCurrentTicketsForSale();
         Map<String, Integer> response = new HashMap<>();
         response.put("remainingTickets", remainingTickets);
 
-        return ResponseEntity.ok(response); // Return the remaining tickets in the pool
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/customer/data")
     public ResponseEntity<Map<String, Integer>> getCustomerTicketData() {
         Map<String, Integer> response = new HashMap<>();
-        response.put("remainingTickets", ticketPool.getCurrentTicketsForSale()); // Get current available tickets
-        response.put("ticketsSold", ticketPoolService.getTicketsSold()); // Get total tickets sold
+        response.put("remainingTickets", ticketPool.getCurrentTicketsForSale());
+        response.put("ticketsSold", ticketPoolService.getTicketsSold());
 
         return ResponseEntity.ok(response);
     }
@@ -54,17 +54,8 @@ public class TicketPoolController {
                 return ResponseEntity.badRequest().body(response);
             }
 
-            // Validate that the customer name is not empty
-            if (customerName == null || customerName.isEmpty()) {
-                logger.warn("Purchase attempt failed: Customer name is missing.");
-                response.put("message", "Customer name is required.");
-                return ResponseEntity.badRequest().body(response);
-            }
-
-            // Log the purchase attempt
             logger.info("Purchase attempt: Customer {} is trying to buy {} tickets.", customerName, ticketCount);
 
-            // Call the TicketPool's removeTickets method to reduce the available tickets
             boolean isTicketPurchased = ticketPool.removeTickets(ticketCount);
 
             if (isTicketPurchased) {
@@ -77,13 +68,13 @@ public class TicketPoolController {
                 return ResponseEntity.status(500).body(response);
             }
         } catch (Exception e) {
-            logger.error("Error during ticket purchase: {}", e.getMessage()); // Log the exception
+            logger.error("Error during ticket purchase: {}", e.getMessage());
             response.put("message", "An error occurred: " + e.getMessage());
-            return ResponseEntity.status(500).body(response); // Internal server error
+            return ResponseEntity.status(500).body(response);
         }
     }
 
-    // Endpoint to update configuration
+    // update configuration
     @PostMapping("/configuration")
     public ResponseEntity<Map<String, String>> updateConfiguration(@RequestBody Map<String, Integer> configData) {
         Map<String, String> response = new HashMap<>();
@@ -91,13 +82,11 @@ public class TicketPoolController {
         try {
             logger.info("Received request to update configuration with data: {}", configData);
 
-            // Extract configuration values from request
             int maxCapacity = configData.getOrDefault("maxTicketCapacity", Configuration.maxTicketCapacity);
             int totalTickets = configData.getOrDefault("totalTickets", Configuration.currentTicketsAvailable);
             int ticketReleaseRate = configData.getOrDefault("ticketReleaseRate", Configuration.ticketReleaseRate);
             int customerRetrievalRate = configData.getOrDefault("customerRetrievalRate", Configuration.customerRetrievalRate);
 
-            // Log the extracted configuration values
             logger.info("Extracted configuration values - Max Capacity: {}, Total Tickets: {}, Ticket Release Rate: {}, Customer Retrieval Rate: {}",
                     maxCapacity, totalTickets, ticketReleaseRate, customerRetrievalRate);
 

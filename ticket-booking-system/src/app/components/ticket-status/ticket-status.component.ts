@@ -8,8 +8,7 @@ import { TicketService } from '../../services/ticket.service';
   styleUrls: ['./ticket-status.component.css']
 })
 export class TicketStatusComponent implements OnInit {
-  remainingTickets: number = 0; // Initialize with a default value to avoid undefined access
-  systemStatus: string = 'stopped';
+  remainingTickets: number = 0;
 
   constructor(private ticketService: TicketService) {}
 
@@ -17,13 +16,9 @@ export class TicketStatusComponent implements OnInit {
     this.fetchRemainingTickets();
   }
 
-
-
-
   fetchRemainingTickets() {
     this.ticketService.getTicketInfo().subscribe(
       (data) => {
-        // Assuming data is the response from the backend, and it contains a property 'remainingTickets'
         if (data && data.remainingTickets !== undefined) {
           this.remainingTickets = data.remainingTickets; // Update remaining tickets
           console.log('Remaining Tickets:', this.remainingTickets);
@@ -32,7 +27,6 @@ export class TicketStatusComponent implements OnInit {
         }
       },
       (error) => {
-        // Improved error handling to give more information on what failed
         console.error('Error fetching ticket info:', error);
         if (error.status === 403) {
           console.error('Access is forbidden. Check your CORS or authentication settings.');

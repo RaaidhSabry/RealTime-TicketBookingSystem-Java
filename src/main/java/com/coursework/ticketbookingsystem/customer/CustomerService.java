@@ -16,7 +16,7 @@ public class CustomerService {
     @PostConstruct
     public void startCustomers() throws InterruptedException {
         for (int i = 0; i < 10; i++) {
-            Customer customer = new Customer(i + 1, ticketPool); // Example parameters
+            Customer customer = new Customer(i + 1, ticketPool);
             new Thread(customer).start();
         }
         Thread.sleep(Configuration.getCustomerRetrievalInterval());

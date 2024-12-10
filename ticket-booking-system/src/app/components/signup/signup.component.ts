@@ -47,9 +47,8 @@ export class SignupComponent {
 
     this.authService.signup(user).subscribe(
       () => {
-        // Success block; no need to check response.status
         alert('Signup successful!');
-        this.dialogRef.close(); // Close the signup dialog
+        this.dialogRef.close();
       },
       (err) => {
         console.error('Signup error:', err);

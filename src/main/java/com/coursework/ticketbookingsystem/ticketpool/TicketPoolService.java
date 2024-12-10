@@ -14,19 +14,13 @@ public class TicketPoolService {
         this.ticketPool = ticketPool;
     }
 
-    // Logic for purchasing tickets
-    public boolean buyTickets(String customerName, int ticketCount) {
-        return ticketPool.removeTickets(ticketCount);  // Remove tickets from the shared pool
-    }
-
     // Get the number of tickets sold
     public int getTicketsSold() {
-        return TicketPool.getTotalTicketsSold();  // Get from TicketPool class
+        return TicketPool.getTotalTicketsSold();
     }
 
     public void updateConfiguration(int maxCapacity, int ticketReleaseRate, int customerRetrievalRate, int totalTickets) {
         synchronized (Configuration.class) {
-            // Update the configuration
             Configuration.maxTicketCapacity = maxCapacity;
             Configuration.ticketReleaseRate = ticketReleaseRate;
             Configuration.customerRetrievalRate = customerRetrievalRate;
@@ -35,10 +29,8 @@ public class TicketPoolService {
             int currentTickets = ticketPool.getCurrentTicketsForSale();
             int ticketDifference = totalTickets - currentTickets;
 
-            // Update current tickets available
             Configuration.currentTicketsAvailable = totalTickets;
 
-            // Adjust the ticket pool for consistency
             ticketPool.addTickets(ticketDifference);
         }
     }

@@ -11,10 +11,9 @@ import java.util.Scanner;
 public class TicketBookingSystemApplication {
 
     public static void main(String[] args) {
-        // Automatically start Spring Boot Application
         startSpringApplication();
 
-        // Enter CLI mode after starting the Spring Boot Application
+        // Main Menu setup
         Scanner input = new Scanner(System.in);
         int choice = 0;
 
@@ -31,7 +30,7 @@ public class TicketBookingSystemApplication {
 
             switch (choice) {
                 case 1:
-                    runCLI(); // Perform configuration logic
+                    runCLI();
                     break;
                 case 2:
                     startSpringApplication();
@@ -53,9 +52,10 @@ public class TicketBookingSystemApplication {
         System.out.println("Press 3 to Exit");
     }
 
+    // CLI logic
     private static void runCLI() {
-        Configuration config = new Configuration(); // Create a Configuration instance
-        config.start(); // Configure system parameters
+        Configuration config = new Configuration();
+        config.start();
 
         Scanner input = new Scanner(System.in);
         String command;
@@ -91,6 +91,7 @@ public class TicketBookingSystemApplication {
         }
     }
 
+    // SpringBoot logic
     public static void startSpringApplication() {
         System.out.println("Starting Spring Boot Application...");
         try {
@@ -104,7 +105,4 @@ public class TicketBookingSystemApplication {
             System.err.println("Enter Configuration !!");
         }
     }
-
-
-
 }

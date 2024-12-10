@@ -4,15 +4,12 @@ body {
   background-color: #f8f9fa;
   margin: 0;
   padding: 0;
-  padding-top: 80px; /* Space for the fixed header */
-  padding-bottom: 40px; /* Space for the footer */
-  overflow-y: auto; /* Allow vertical scrolling */
-  height: 100%; /* Ensure body takes full height */
+  padding-top: 80px;
+  padding-bottom: 40px;
+  overflow-y: auto;
+  height: 100%;
 }
 
-
-
-/* Main App Layout */
 .app-container {
   font-family: 'Roboto', Arial, sans-serif;
   display: flex;
@@ -21,10 +18,9 @@ body {
   background-color: #f8f9fa;
   padding: 20px;
   box-sizing: border-box;
-  overflow-y: auto; /* Allow scrolling inside the container */
+  overflow-y: auto;
 }
 
-/* Header Styles */
 header {
   background-color: #0056b3;
   color: #fff;
@@ -39,10 +35,9 @@ header {
   left: 0;
   z-index: 100;
   box-sizing: border-box;
-  height: 80px; /* Fixed header height */
+  height: 80px;
 }
 
-/* Header Content */
 .header-content {
   display: flex;
   justify-content: space-between;
@@ -86,19 +81,17 @@ header nav ul li a:hover {
   background-color: #0b1850;
 }
 
-/* Main Content Area */
 main {
   display: flex;
   flex-direction: column;
   gap: 30px;
   box-sizing: border-box;
   width: 100%;
-  margin-top: 100px; /* Adjusted to give space below fixed header */
-  flex-grow: 1; /* Ensure it grows to fill remaining space */
-  padding-bottom: 50px; /* Ensure content doesn't overlap footer */
+  margin-top: 100px;
+  flex-grow: 1;
+  padding-bottom: 50px;
 }
 
-/* Footer Styles */
 footer {
   text-align: center;
   padding: 15px 20px;
@@ -114,7 +107,6 @@ footer {
   box-sizing: border-box;
 }
 
-/* Adjusting spacing for buttons and containers */
 button {
   margin-top: 10px;
 }
@@ -123,7 +115,6 @@ input {
   margin-bottom: 10px;
 }
 
-/* Flex Layout for the Main Container */
 .content {
   flex: 1;
   padding: 30px;
@@ -134,7 +125,6 @@ input {
   box-sizing: border-box;
 }
 
-/* Ensure All Sections Have Adequate Spacing */
 .container {
   padding: 30px;
   background-color: #ffffff;
@@ -151,7 +141,6 @@ p {
   margin-bottom: 10px;
 }
 
-/* Welcome Screen Styles */
 .welcome-screen {
   display: flex;
   flex-direction: column;
@@ -198,7 +187,6 @@ p {
   margin-top: 10px;
 }
 
-/* Ensure that all sections (ticket pool, configuration, etc.) have proper spacing */
 .ticket-info, .ticket-actions {
   margin-bottom: 20px;
 }
@@ -235,7 +223,6 @@ p {
   border-width: medium;
 }
 
-/* Mobile responsiveness */
 @media (max-width: 768px) {
   .ticket-pool-counter {
     max-width: 90%;

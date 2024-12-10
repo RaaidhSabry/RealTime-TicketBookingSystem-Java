@@ -7,28 +7,19 @@ import { NgIf } from '@angular/common';
   selector: 'app-configuration-form',
   templateUrl: './configuration-form.component.html',
   styleUrls: ['./configuration-form.component.css'],
-  imports: [
-    FormsModule,
-    NgIf
-  ],
+  imports: [FormsModule, NgIf],
   standalone: true
 })
 export class ConfigurationFormComponent {
-  maxTicketCapacity: number = 5000; // Default maximum ticket capacity
-  totalTickets: number = 0; // Default total tickets
-  ticketReleaseRate: number = 1; // Default ticket release rate in minutes
-  customerRetrievalRate: number = 1; // Default customer retrieval rate in seconds
-  configurationMessage: string = ''; // Message to display configuration updates
-  systemStatus: string = 'running'; // Default system status
+  maxTicketCapacity: number = 5000;
+  totalTickets: number = 0;
+  ticketReleaseRate: number = 1;
+  customerRetrievalRate: number = 1;
+  configurationMessage: string = '';
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.updateConfiguration(); // Fetch configuration data when the component initializes
-  }
-
   updateConfiguration() {
-    // Validate input fields before making a request
     if (!this.validateInputs()) {
       return;
     }
@@ -43,11 +34,12 @@ export class ConfigurationFormComponent {
     this.http.post<{ message: string }>('http://localhost:8080/api/ticket/configuration', requestPayload)
       .subscribe({
         next: (response) => {
-          this.configurationMessage = response.message; // Display success message
+          this.configurationMessage = response.message;
           alert('Configuration updated successfully.');
         },
         error: (error) => {
-          this.handleError(error, 'Configuration update failed. Please try again later.');
+          console.error('Configuration update failed:', error);
+          alert('Configuration update failed. Please try again later.');
         }
       });
   }
@@ -55,6 +47,7 @@ export class ConfigurationFormComponent {
   // Validation logic
   validateInputs(): boolean {
     if (!this.maxTicketCapacity || !this.totalTickets || !this.ticketReleaseRate || !this.customerRetrievalRate) {
+      alert("Enter all fields !")
       return false;
     }
 
@@ -79,22 +72,5 @@ export class ConfigurationFormComponent {
     }
 
     return true;
-  }
-
-  // Improved error handling method
-  handleError(error: any, defaultMessage: string) {
-    if (error.status === 403) {
-      console.error('Access is forbidden. Check your CORS or authentication settings.');
-      alert('Access forbidden. Please check system permissions.');
-    } else if (error.status === 404) {
-      console.error('Endpoint not found. Check your URL.');
-      alert('System action failed. Endpoint not found.');
-    } else if (error.status === 500) {
-      console.error('Server error. Please try again later.');
-      alert('System action failed due to server error.');
-    } else {
-      console.error(`Error status: ${error.status}, Error message: ${error.message}`);
-      alert(defaultMessage);
-    }
   }
 }

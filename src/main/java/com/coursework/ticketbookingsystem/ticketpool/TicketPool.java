@@ -2,7 +2,6 @@ package com.coursework.ticketbookingsystem.ticketpool;
 
 import com.coursework.ticketbookingsystem.configuration.Logger;
 import com.coursework.ticketbookingsystem.configuration.Configuration;
-import com.coursework.ticketbookingsystem.vendor.Vendor;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -20,7 +19,7 @@ public class TicketPool {
         this.maxTicketCapacity = Configuration.maxTicketCapacity;
         this.tickets = Collections.synchronizedList(new LinkedList<>());
 
-        // Initialize with available tickets, ensuring it does not exceed max capacity
+        // Initialize with available tickets and also it does not exceed max capacity
         int initialTickets = Math.min(Configuration.currentTicketsAvailable, maxTicketCapacity);
         for (int i = 0; i < initialTickets; i++) {
             tickets.add(1);
@@ -32,14 +31,10 @@ public class TicketPool {
 
     @Override
     public String toString() {
-        return "TicketPool {" +
-                "Current Tickets Available=" + tickets.size() +
-                ", Max Ticket Capacity=" + maxTicketCapacity +
-                ", Total Tickets Sold=" + totalTicketsSold +
-                '}';
+        return "TicketPool {" + "Current Tickets Available=" + tickets.size() + ", Max Ticket Capacity=" + maxTicketCapacity + ", Total Tickets Sold=" + totalTicketsSold + '}';
     }
 
-    // Adds tickets to the pool, respecting max capacity
+    // Adds tickets to the ticketPool
     public synchronized void addTickets(int numberOfTickets) {
         int ticketsRemainingForSale = getRemainingTicketsForSale();
         int ticketsToAdd = Math.min(numberOfTickets, ticketsRemainingForSale);
@@ -54,15 +49,15 @@ public class TicketPool {
         }
     }
 
-    // Removes tickets from the pool (tickets bought by a customer)
+    // Removes tickets from the ticketPool
     public synchronized boolean removeTickets(int numberOfTickets) {
         int currentAvailable = tickets.size();
 
         if (currentAvailable >= numberOfTickets) {
             for (int i = 0; i < numberOfTickets; i++) {
-                tickets.remove(0); // Remove a ticket
+                tickets.remove(0);
             }
-            totalTicketsSold += numberOfTickets; // Increment the total tickets sold
+            totalTicketsSold += numberOfTickets;
             Logger.logToConsole("Removed " + numberOfTickets + " tickets. Total tickets sold: " + totalTicketsSold + ". Current available tickets: " + tickets.size());
             return true;
         } else {
@@ -71,17 +66,8 @@ public class TicketPool {
         }
     }
 
-    // Method to get the current number of tickets available for sale
-    public synchronized int getCurrentTicketsAvailable() {
-        return tickets.size();
-    }
 
-    // Method to get max ticket capacity
-    public int getMaxTicketCapacity() {
-        return maxTicketCapacity;
-    }
-
-    // Method to get the total tickets sold
+    //get the total tickets sold
     public static int getTotalTicketsSold() {
         return totalTicketsSold;
     }
