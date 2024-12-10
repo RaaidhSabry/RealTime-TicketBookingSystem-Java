@@ -1,4 +1,4 @@
-#Ticket Booking System
+# Ticket Booking System
 
 A multi-threaded ticket booking system that supports real-time ticket management, configuration, and monitoring. This project is implemented using a Java CLI for core functionalities, a Spring Boot backend, and an Angular-based frontend GUI.
 
@@ -12,11 +12,11 @@ How to Use
 Future Enhancements
 Authors
 
-#Project Overview 
+# Project Overview 
 
 The Ticket Booking System is a producer-consumer-based application that allows vendors to add tickets to a shared ticket pool and customers to retrieve tickets in real time. It uses synchronization techniques to ensure thread safety and provides a graphical user interface for better user experience.
 
-#Features
+# Features
 
 Core Features
 
@@ -30,7 +30,7 @@ Input validation for configuration settings.
 Real-time synchronization between CLI, backend, and frontend.
 Logs all activities for audit and debugging.
 
-#Technologies Used
+# Technologies Used
 
 Backend
 
@@ -47,7 +47,7 @@ Multi-threading: For producer-consumer logic.
 Synchronization: Ensures thread-safe operations on shared resources.
 Git: Version control.
 
-#System Architecture
+# System Architecture
 The project follows a modular architecture:
 
 Java CLI:
@@ -63,7 +63,7 @@ Frontend (Angular):
 
 Provides a user-friendly interface for interacting with the system.
 
-#Installation and Setup
+# Installation and Setup
 
 Prerequisites
 
@@ -136,7 +136,7 @@ Add tickets: POST /api/tickets/add
 Remove tickets: POST /api/tickets/remove
 View status: GET /api/tickets/status
 
-Future Enhancements
+# Future Enhancements
 Priority Customers: Add VIP customer functionality using a priority queue.
 Dynamic Management: Allow adding/removing vendors and customers at runtime.
 Real-Time Analytics: Integrate a dashboard for visualizing ticket sales.
@@ -146,7 +146,7 @@ Your Name: Developer and project lead.
 Contributor Name: [Optional] Role or contributions.
 For queries, please contact: [your-email@example.com]
 
-License
+# License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 This README file provides all necessary details for setup, usage, and understanding your project. Customize it further with your specifics!
