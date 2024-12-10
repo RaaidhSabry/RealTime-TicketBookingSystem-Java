@@ -75,19 +75,18 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 
 - Clone the Repository
 
-#### Copy code
+##
     git clone https://github.com/your-repo/ticket-booking-system.git
 
 ### Backend Setup
 
 - Navigate to the backend folder:
 
-#### Copy code
+##
     cd ticketBookingSystem
 
 Build and run the Spring Boot application:
 
-#### Copy code
     mvn clean install
     mvn spring-boot:run
 
@@ -95,12 +94,10 @@ Build and run the Spring Boot application:
 
 Navigate to the Angular frontend folder:
 
-#### Copy code
     cd ticket-booking-system
     
 Install dependencies and start the Angular development server:
 
-#### Copy code
     npm install
     ng serve
     
@@ -108,33 +105,34 @@ Install dependencies and start the Angular development server:
 
 Compile and run the CLI application:
 
-#### Copy code
-        javac *.java
-        java Main
+    javac *.java
+    java Main
 
-Access the Application
+### Access the Application
 
 Open your browser and navigate to:
-arduino
-Copy code
-http://localhost:4200
-How to Use
-CLI
 
-Configure system parameters (e.g., total tickets, release rate).
-Use start and stop commands to control operations.
-Monitor real-time ticket status in the console.
-Frontend GUI
+    http://localhost:4200
 
-Access the control panel for starting/stopping operations.
-View ticket pool status, logs, and system configuration.
-Update settings dynamically via the configuration panel.
-Backend API
+### How to Use CLI
+
+- Configure system parameters (e.g., total tickets, release rate).
+- Use start and stop commands to control operations.
+- Monitor real-time ticket status in the console.
+
+### Frontend GUI
+
+- Access the control panel for starting/stopping operations.
+- View ticket pool status and system configuration.
+- Update settings dynamically via the configuration panel.
+
+### Backend API
 
 Access RESTful endpoints for advanced operations:
-Add tickets: POST /api/tickets/add
-Remove tickets: POST /api/tickets/remove
-View status: GET /api/tickets/status
+
+- Add tickets: POST /api/tickets/add
+- Remove tickets: POST /api/tickets/remove
+- View status: GET /api/tickets/status
 
 
 ## License
