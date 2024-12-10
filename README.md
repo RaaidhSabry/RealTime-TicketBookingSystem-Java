@@ -3,7 +3,7 @@
 A multi-threaded ticket booking system that supports real-time ticket management, configuration, and monitoring. This project is implemented using a Java CLI for core functionalities, a Spring Boot backend, and an Angular-based frontend GUI.
 
 ### Table of Contents
-[Project Overview](#ProjectOverview)
+[Project Overview](#Project_Overview)
 [Features](#Features)
 [Technologies Used](#TechnologiesUsed)
 [System Architecture](#SystemArchitecture)
@@ -12,7 +12,7 @@ A multi-threaded ticket booking system that supports real-time ticket management
 [Future Enhancements](#FutureEnhancements)
 [Authors](#Authors)
 
-## Project Overview(#ProjectOverview) 
+## Project Overview
 
 The Ticket Booking System is a producer-consumer-based application that allows vendors to add tickets to a shared ticket pool and customers to retrieve tickets in real time. It uses synchronization techniques to ensure thread safety and provides a graphical user interface for better user experience.
 
