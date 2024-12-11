@@ -93,6 +93,15 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 
 ### Frontend Setup
 
+- Install all the angular set-up before progressing to the next stage
+  
+##
+    npm install -g @angular/cli
+    npm install --save-dev @angular-devkit/build-angular
+    npm install @angular/animations @angular/common @angular/compiler @angular/core @angular/forms @angular/platform-browser @angular/platform-browser-dynamic @angular/router @angular/cli @angular/material @angular/cdk @angular/animations --save-dev
+    npm install @angular/platform-server @angular/ssr --save-dev
+
+
 - Navigate to the Angular frontend folder:
 
 ##
@@ -119,9 +128,12 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 
 ### Frontend GUI
 
-- Access the control panel for starting/stopping operations.
-- View ticket pool status and system configuration.
-- Update settings dynamically via the configuration panel.
+- Access the control panel for starting/stopping the customer - vendor pattern.
+- View ticket pool status in the homepage, you can refresh the browser to get real-time updates.
+- Sign-up as a customer or a vendor for more dynamic operations.
+- Login as a customer to buy tickets from the front-end
+- Login as a vendor to update settings dynamically via the configuration panel.
+- The "DecemberFest" logo acts as a hyperlink to the homepage.
 
 ### Backend API
 
@@ -129,6 +141,7 @@ Access RESTful endpoints for advanced operations:
 
 - Buy tickets: POST /api/tickets/customer/buy
 - Ticket Status: POST /api/tickets/info
+- etc...
 
 ## Authors
 
