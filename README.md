@@ -62,6 +62,29 @@ The Ticket Booking System is a producer-consumer-based application that allows v
 
 - Provides a user-friendly interface for interacting with the system.
 
+## 📷 Screenshots
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/332e10e0-6e87-47e5-a2d9-ff2b675f5114" alt="Screenshot 1" width="70%">
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/53724eb8-c346-4092-827e-f83517fb566b" alt="Screenshot 2" width="70%">
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/749a723b-f8a3-4a1c-bc14-cba6b7802bf6" alt="Screenshot 3" width="70%">
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0e249ac0-3532-4c37-9177-a30cde57d524" alt="Screenshot 4" width="70%">
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8472adb6-129e-41f7-84a7-ea4ccb8a50fb" alt="Screenshot 5" width="70%">
+</p>
+
+
 ## Installation_and_Setup
 
 ### Prerequisites
